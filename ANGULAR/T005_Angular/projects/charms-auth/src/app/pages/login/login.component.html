@@ -1,0 +1,67 @@
+<div class="login" fxLayout="row wrap" fxLayoutAlign="center center" fxFlexAlign="center" style="position: relative;">
+    
+    <mat-card fxLayout="row wrap" class="mat-elevation-z6" style="margin: 62px 0 5px 0; padding: 36px; width: 500px; background: #1a3581; color: white !important;">
+        <div fxFlex="100" fxLayoutAlign="center center">
+            <img src="/assets/images/logo2x.png" alt="image" class="logo">
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <div fxLayout="row wrap" fxLayoutAlign="center center">
+                <mat-form-field fxFlex="100" appearance="outline" *ngIf="!multipleCompanies">
+                    <mat-label>Username</mat-label>
+                    <input matInput required formControlName="username" name="username" autocomplete="off">
+                    <mat-error
+                        *ngIf="loginForm.controls.username.hasError('required') && loginForm.controls.username.touched">
+                        Username is required.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="100" appearance="outline" *ngIf="!multipleCompanies">
+                    <mat-label>Password</mat-label>
+                    <input matInput required formControlName="password" autocomplete="off" name="password"
+                        [type]="hidePassword ? 'password' : 'text'">
+
+                    <button mat-icon-button
+                        type="button"
+                        matSuffix 
+                        (click)="hidePassword = !hidePassword" 
+                        [attr.aria-label]="'Hide password'" 
+                        [attr.aria-pressed]="'hide'">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error
+                        *ngIf="loginForm.controls.password.hasError('required') && loginForm.controls.password.touched">
+                        Password is required.</mat-error>
+                    <mat-error *ngIf="authError">{{authError}}</mat-error>
+                </mat-form-field>
+
+                <div fxFlex="100" style="height: 24px;"></div>
+
+                <div fxFlex="100">
+                    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+                            <button type="button" mat-raised-button color="accent" routerLink="/forgot-password">
+                                <span>Forgot Password?</span>
+                            </button>
+                        </div>
+
+                        <button type="submit" [disabled]="!getValidity() || btnDisable" mat-raised-button
+                            color="primary">
+
+                            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                                <span>Login</span>
+                                <mat-spinner *ngIf="btnDisable" color="accent" diameter="20" strokeWidth="3">
+                                </mat-spinner>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+
+    <button mat-raised-button 
+        color="accent" 
+        (click)="onDownloadApps()" 
+        style="position: absolute; right: 15px; top: 15px;">
+        <mat-icon>get_app</mat-icon>&nbsp;Download Apps
+    </button>
+</div>

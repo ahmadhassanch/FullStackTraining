@@ -1,0 +1,177 @@
+.result {
+    border-radius: 12px;
+    padding: 3px 10px;
+    line-height: 26px;
+    font-weight: 700;
+    position: relative;
+
+    &.normal {
+        background-color: green;
+    }
+
+    &.warning {
+        background-color: rgb(233, 151, 0);
+    }
+
+    &.warning-low {
+        background-color: rgb(233, 151, 0);
+    }
+
+    &.warning-high {
+        background-color: rgb(233, 151, 0);
+    }
+
+    &.critical {
+        background-color: red;
+    }
+
+    &.critical-low {
+        background-color: red;
+    }
+
+    &.critical-high {
+        background-color: red;
+    }
+
+    &.ultra-critical {
+        background-color: rgb(155, 1, 1);
+    }
+
+    &.ultra-critical-low {
+        background-color: rgb(155, 1, 1);
+    }
+
+    &.ultra-critical-high {
+        background-color: rgb(155, 1, 1);
+    }
+
+    &.invalid {
+        background-color: rgb(155, 1, 1);
+    }
+
+    &.message-textoverflow {
+        width: 140px !important;
+        padding: 0 10px !important;
+        overflow: hidden;
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-color: red;
+        // line-height: 23px;
+    }
+}
+
+.invalid-text 
+{
+    text-decoration: line-through;
+}
+
+.esclated-state {
+
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 3px 10px;
+    line-height: 26px;
+    font-weight: 700;
+
+    &.closed {
+        background-color: green;
+    }
+
+    &.responded {
+        background-color: rgb(233, 151, 0);
+    }
+
+    &.escalated {
+        background-color: #929200;
+    }
+
+    &.unhandled {
+        background-color: rgb(155, 1, 1);
+    }
+
+    &.invalid {
+        background-color: rgb(155, 1, 1);
+    }
+}
+
+.manual {
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 3px 10px;
+    line-height: 26px;
+    font-weight: 700;
+    position: relative;
+
+    &.yes {
+        background-color: blue;
+    }
+
+    &.no {
+        background-color: green;
+    }
+}
+
+.continuous-mont 
+{
+    background-color: #000 !important;
+}
+
+.continuous-mont-fg
+{
+    color: #ffffff !important;
+}
+
+.obs_live 
+{
+    vertical-align: middle;
+    height: 18px;
+    animation: blinker 1s linear infinite;
+}
+
+.obs_offline 
+{
+    vertical-align: middle;
+    height: 18px;
+}
+
+.efc_image 
+{
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+}
+
+.call-type {
+    &.audio {
+        color: green;
+    }
+
+    &.video {
+        color: blue;
+    }
+}
+
+.edit_result {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: -16px;
+    top: -3px;
+    background-color: transparent;
+}
+
+.confirmed-reading 
+{
+    &::after {
+        content: " *";
+        color: red;
+        font-size: 18px;
+    }
+}
+
+.attachments-img {
+    height: 30px; 
+    width: 30px;
+}

@@ -1,0 +1,78 @@
+.appointment-state {
+    color: #ffffff;
+    padding: 4px 6px;
+    border-radius: 4px;
+    line-height: 16px;
+    text-align: center;
+    position: relative;
+    font-weight: 600;
+
+    // Payment States
+    &.open {
+        background-color: gray;
+    }
+
+    &.paid {
+        background-color: green;
+    }
+
+    &.partial {
+        background-color: #185a9c;
+    }
+
+    &.draft {
+        background-color: #7d53ab;
+    }
+
+    &.waiting {
+        background-color: #ab7c28;
+    }
+
+    &.refund {
+        background-color: #D68910;
+    }
+
+    // Appointment States
+    &.booked {
+        background-color: #95851c;
+    }
+        
+    &.confirmed {
+        background-color: #66961c;
+    }
+        
+    &.available {
+        background-color: #476565;
+    }
+        
+    &.completed {
+        background-color: #5a6477;
+    }
+        
+    &.available-on-call {
+        background-color:#82b929;
+    }
+        
+    &.cancelled {
+        background-color: #4f161c;
+    }
+        
+    &.missed {
+        background-color: #752521;
+    }
+
+    &.in-process {
+        background-color: #143c1e;
+    }
+
+
+    // Vital States
+    &.pending {
+        background-color: #4f161c;
+    }
+
+    &.taken {
+        background-color: green;
+    }
+
+}

@@ -1,0 +1,99 @@
+<div fxLayout="row wrap" style="height: 100%;" class="bg">
+
+    <!-- Header -->
+    <mat-progress-bar color="warn" mode="query" *ngIf="loading"> </mat-progress-bar>
+
+    <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start start">
+        
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="start center" fxLayoutGap="25px" 
+            class="header-container">
+
+            <mat-checkbox color="accent" 
+                name="analysis" [(ngModel)]="isAnalyzed" 
+                (change)="perform_analysis()">Plot Analysis</mat-checkbox>
+
+            <span style="margin-right: 8px;">Smooth Signal</span>
+            <mat-slider
+                max="10"
+                min="0"
+                step="0.5"
+                [(ngModel)]="value"
+                [vertical]="false"
+                (change)="onSmoothValueChange()">
+            </mat-slider>
+
+            <span style="margin-left: 25px; margin-right: 8px;">Zoom Pane</span>
+            <mat-slider
+                name="width-zoom"
+                [max]="10"
+                [min]="1"
+                [step]="1"
+                [(ngModel)]="widthVal"
+                (change)="onChangeWidth()">
+            </mat-slider>
+
+            <!-- <button type="button" mat-stroked-button color="warn" (click)="onDownloadFile()" style="margin-right: 30px; margin-left: 5px;">
+                <mat-icon>arrow_downward</mat-icon>&nbsp;Download
+            </button> -->
+
+            <div fxFlex fxLayout="row" fxLayoutAlign="end end">
+                <div class="color-adjustment" 
+                    fxLayout="row" fxLayoutAlign="center center">
+
+                    <div class="wave-content" style="background-color: green;"></div>
+                    <div class="mr-right-15">P Wave</div>
+
+                    <div class="wave-content" style="background-color: #ff01fb;"></div>
+                    <div class="mr-right-15">Q Wave</div>
+
+                    <div class="wave-content" style="background-color: blue;"></div>
+                    <div class="mr-right-15">R wave</div>
+
+                    <div class="wave-content" style="background-color: #000;"></div>
+                    <div class="mr-right-15">S Wave</div>
+
+                    <div class="wave-content" style="background-color: red;"></div>
+                    <div>T Wave</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="readings" 
+            *ngIf="analyizedData.length > 0" fxFlex="100" 
+            fxLayout="row wrap" fxLayoutAlign="start start">
+
+            <div fxFlex *ngFor="let item of analyizedData" 
+                fxLayout="row wrap" fxLayoutAlign="center center" 
+                style="border-right: 1px solid #000;"> 
+
+                <div fxFlex="100" class="title">{{item.key}}</div>
+                <div fxFlex="100" fxLayoutAlign="center center" 
+                    class="data-container">
+                    <span class="value">{{getValue(item)}}</span>
+                    <sub class="unit" *ngIf="item.unit">{{item.unit}}</sub>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div fxFlex="100" style="height: 5px; background-color: #292d39;"></div>
+
+    <div class="bg container-cm"
+        fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start stretch">
+
+        <div class="cm-container-sec">
+            <img src="/assets/images/cm_graph-ic.svg" style="height: 20px;"/>
+            &nbsp;&nbsp;&nbsp;
+            <span class="cm-title">{{name}}</span>
+        </div>
+
+        <div style="width: 100%; overflow-x: auto;">
+            <div #chart id="chartID" class="channel-container"></div>
+        </div>
+
+    </div>
+</div>

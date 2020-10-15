@@ -1,0 +1,68 @@
+{
+    "/api": {
+        "target": {
+            "host": "chi-dev3.cognitivehealthintl.com",
+            "protocol": "https:",
+            "port": 443
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/auth": {
+        "target": {
+            "host": "chi-dev3.cognitivehealthintl.com",
+            "protocol": "https:",
+            "port": 443
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/Authorize": {
+        "target": {
+            "host": "chi-dev3.cognitivehealthintl.com",
+            "protocol": "https:",
+            "port": 443
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/assets/apps/auth": {
+        "target": {
+            "host": "chi-dev3.cognitivehealthintl.com",
+            "protocol": "https:",
+            "port": 443
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/Logout": {
+        "target": {
+            "host": "chi-dev3.cognitivehealthintl.com",
+            "protocol": "https:",
+            "port": 443
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/ws": {
+        "target": "wss://chi-dev3.cognitivehealthintl.com",
+        "secure": false,
+        "changeOrigin": true,
+        "ws": true
+    },
+    "/calls": {
+        "target": {
+            "host": "chi-dev3.cognitivehealthintl.com",
+            "protocol": "https:",
+            "port": 443
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/calls/room": {
+        "target": "wss://chi-dev3.cognitivehealthintl.com",
+        "secure": false,
+        "changeOrigin": true,
+        "ws": true
+    }
+}

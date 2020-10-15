@@ -1,0 +1,245 @@
+// Dark Theme colors
+$dark-primary: (
+    50:#E7F2F9,
+  100: #C2E0F0,
+  200: #9ACBE7,
+  300: #71B6DD,
+  400: #52A6D5,
+  500: #3496CE,
+  600: #2F8EC9,
+  700: #2783C2,
+  800: #2179BC,
+  900: #1568B0,
+  A100:#E2F1FF,
+  A200:#AFD7FF,
+  A400:#7CBEFF,
+  A700:#63B1FF,
+
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+
+$dark-secondary: (
+    50: #e0ffee,
+  100: #b3fed5,
+  200: #80feb9,
+  300: #4dfd9c,
+  400: #26fc87,
+  500: #00fc72,
+  600: #00fc6a,
+  700: #00fb5f,
+  800: #00fb55,
+  900: #00fa42,
+  A100: #ffffff,
+  A200: #edfff1,
+  A400: #baffc8,
+  A700: #a1ffb4,
+
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+// Light Theme
+$light-primary: (
+    50:#E7F2F9,
+  100: #C2E0F0,
+  200: #9ACBE7,
+  300: #71B6DD,
+  400: #52A6D5,
+  500: #3496CE,
+  600: #2F8EC9,
+  700: #2783C2,
+  800: #2179BC,
+  900: #1568B0,
+  A100:#E2F1FF,
+  A200:#AFD7FF,
+  A400:#7CBEFF,
+  A700:#63B1FF,
+
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+
+$light-secondary: (
+    50 : #ececed,
+    100 : #d0d1d2,
+    200 : #b1b2b5,
+    300 : #919397,
+    400 : #7a7b80,
+    500 : #62646a,
+    600 : #5a5c62,
+    700 : #505257,
+    800 : #46484d,
+    900 : #34363c,
+    A100 : #98b3f9,
+    A200 : #6790f6,
+    A400 : #2b68ff,
+    A700 : #1256ff,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $dark-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+$fuse-black: (
+    500: black,
+    contrast: (
+        500: $light-primary-text,
+    )
+);
+
+$fuse-navy: (
+    50: #ECECEE,
+    100: #C5C6CB,
+    200: #9EA1A9,
+    300: #7D818C,
+    400: #5C616F,
+    500: #3C4252,
+    600: #353A48,
+    700: #2D323E,
+    800: #262933,
+    900: #1E2129,
+    A100: #C5C6CB,
+    A200: #9EA1A9,
+    A400: #5C616F,
+    A700: #2D323E,
+    contrast: (
+        50: $dark-primary-text,
+        100: $dark-primary-text,
+        200: $dark-primary-text,
+        300: $light-primary-text,
+        400: $light-primary-text,
+        500: $light-primary-text,
+        600: $light-primary-text,
+        700: $light-primary-text,
+        800: $light-primary-text,
+        900: $light-primary-text,
+        A100: $dark-primary-text,
+        A200: $light-primary-text,
+        A400: $light-primary-text,
+        A700: $light-primary-text,
+    )
+);
+
+
+// Background palette for light themes.
+$mat-light-theme-background: (
+  status-bar: map_get($mat-grey, 300),
+  app-bar:    map_get($mat-grey, 100),
+  background: #cfcfcf,
+  hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
+  card:       #fff,
+  dialog:     #fff,
+  disabled-button: $black-12-opacity,
+  raised-button: #fff,
+  focused-button: $black-6-opacity,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+);
+
+// Background palette for dark themes.
+$mat-dark-theme-background: (
+  status-bar: black,
+  app-bar:    map_get($mat-grey, 900),
+  background: #171b27,
+  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card:       #292d39,
+  dialog:     map_get($mat-grey, 800),
+  disabled-button: $white-12-opacity,
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $white-6-opacity,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: map_get($mat-grey, 1000),
+);
+
+// Foreground palette for light themes.
+$mat-light-theme-foreground: (
+  base:              black,
+  divider:           $black-12-opacity,
+  dividers:          $black-12-opacity,
+  disabled:          rgba(black, 0.38),
+  disabled-button:   rgba(black, 0.38),
+  disabled-text:     rgba(black, 0.38),
+  hint-text:         rgba(black, 0.38),
+  secondary-text:    rgba(black, 0.54),
+  icon:              rgba(black, 0.54),
+  icons:             rgba(black, 0.54),
+  text:              rgba(black, 0.87),
+  slider-off:        rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38),
+);
+
+// Foreground palette for dark themes.
+$mat-dark-theme-foreground: (
+  base:              white,
+  divider:           $white-12-opacity,
+  dividers:          $white-12-opacity,
+  disabled:          rgba(white, 0.3),
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     rgba(white, 0.3),
+  hint-text:         rgba(white, 0.3),
+  secondary-text:    rgba(white, 0.7),
+  icon:              white,
+  icons:             white,
+  text:              white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);

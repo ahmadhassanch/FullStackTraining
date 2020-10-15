@@ -1,0 +1,96 @@
+<div [chiPanelFor]="tableFilterPanel" style="cursor: pointer; align-items: center;" [ngClass]="column.align" fxLayout="row">
+    &nbsp;{{column.title}}&nbsp;
+    <mat-icon [class.accent_icon]="SelectedfilterList.length > 0 || isDateRangeFilterApplied">filter_list</mat-icon>
+    <mat-icon color="accent" *ngIf="sortOrder != null" [class.rotate-icon]="sortOrder == null"> 
+        {{ sortOrder == 'ASC' ? 'arrow_downward' : sortOrder == 'DESC' ? 'arrow_upward' : 'code'}}
+    </mat-icon>
+</div>
+
+<chi-panel #tableFilterPanel="chiPanel" [events]="panelEvents">
+    <div fxLayout="column" style="min-width: 240px;" [ngStyle]="{'width': column.filterType === 'DateRange' ? '250px' : ''}">
+        
+        <div class="filter-options" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="start center" style="margin-bottom: 10px;">
+
+                <button *ngIf="column.filterType === 'Standard'" type="button" mat-stroked-button color="primary" class="btn btn-select-all" 
+                    [disabled]="_isSelected" (click)="onFilterSelectAll($event)">Select all
+                </button>
+
+                <mat-label *ngIf="column.filterType === 'DateRange'" class="date-filter-label">
+                   <mat-icon style="margin-right: 5px;">date_range</mat-icon>Select Filter Range
+                </mat-label>
+
+                <button type="button" mat-stroked-button color="primary" class="btn" [disabled]="_isCleared"
+                    (click)="onFilterClearAll($event)">Clear
+                </button>
+
+                <button mat-icon-button *ngIf="column.sortable" (click)="onSortOrder()">
+                    <mat-icon color="accent" [class.rotate-icon]="sortOrder == null">
+                        {{ sortOrder == 'ASC' ? 'arrow_downward' : sortOrder == 'DESC' ? 'arrow_upward' : 'code'}}
+                    </mat-icon>
+                </button>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="column.filterType === 'Standard'">
+                <mat-icon class="search-icon">search</mat-icon>&nbsp;
+                <input fxFlex matInput
+                    [formControl]="searchControl" placeholder="Search here"
+                    type="text" autocomplete="off">
+
+                <button mat-icon-button *ngIf="searchControl.value.length" (click)="onClearSearch()">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <mat-progress-bar color="warn" mode="query" *ngIf="loading"></mat-progress-bar>
+        
+        <div class="filter-content">
+            <ng-container *ngIf="column.filterType === 'Standard'">
+                <mat-option *ngFor="let opt of filterList" [value]="opt.value">
+                    <mat-checkbox color="primary" class="checkbox-label" (change)="onFilterCheckToggle(opt)" [(ngModel)]="opt.selected">
+                        <span>{{opt.value}}</span>
+                    </mat-checkbox>
+                </mat-option>
+                <mat-nav-list *ngIf="filterList.length == 0" style="padding-top: 0px;">
+                    <mat-list-item>
+                        <div fxLayout="row nowrap" fxLayoutAlign="center center" style="padding: 8px;">
+                            <mat-icon class="mat-24" mat-list-icon>error</mat-icon>
+                            <span fxFlex style="font-size: 14px; line-height: 42px;">&nbsp;No Record Found</span>
+                        </div>
+                    </mat-list-item>
+                </mat-nav-list>
+            </ng-container>
+
+            <ng-container *ngIf="column.filterType === 'DateRange'">
+                <form [formGroup]="theForm" fxLayout="row wrap" fxLayoutAlign="space-around" class="p-8">
+                    <mat-form-field fxFlex="100"
+                        appearance="outline">
+                        <mat-label>From Date</mat-label>
+                        <chi-date-picker [field]="from" (selected)="onDateSelected($event, from)" [max]="max_date"></chi-date-picker>
+                    </mat-form-field>
+
+                    <mat-form-field fxFlex="100"
+                        appearance="outline">
+                        <mat-label>To Date</mat-label>
+                        <chi-date-picker [field]="to" (selected)="onDateSelected($event, to)" [max]="max_date"></chi-date-picker>
+                    </mat-form-field>
+                </form>
+            </ng-container>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="8px" style="padding: 10px 5px; border-top: 1px solid #3c3c3c">
+            <div class="filter-content-counts">
+                <span *ngIf="column.filterType === 'Standard'">{{selectedCount ? selectedCount : 'No'}} Selected </span>
+                <span *ngIf="column.filterType === 'DateRange'"></span>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" style="padding-right: 6px;">
+                <button type="button" mat-button color="warn" class="btn" (click)="onResetFilter()">Close</button>
+                <button type="button" mat-raised-button color="primary" class="btn" (click)="onApplyFilters()"
+                    [disabled]="getformValidity()">Ok
+                </button>
+            </div>
+        </div>
+    </div>
+</chi-panel>

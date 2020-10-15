@@ -1,0 +1,76 @@
+<div fxLayout="column" [ngClass]="(inDialog) ? 'chi-dialog' : ''" style="height: 100%">
+    <div class="chi-dialog-title" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="inDialog">
+        <h1 fxFlex>{{title}}</h1>
+        <button mat-icon-button
+                (click)="onCancel()"
+                tabindex="-1">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div fxFlex="100" fxFill fxLayout="column" style="padding: 0 10px;">
+
+        <!-- MultiSelection Header -->
+        <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayout.xs="column" fxLayout.sm="column">
+            <div fxFlex *ngIf="showSelectAll">
+                <mat-checkbox [(ngModel)]="mAllRecordsSelected"
+                    [checked]="mSelectedRecordIds.length > 0 && mSelectedRecordIds.length == mTableData.length"
+                    [indeterminate]="mSelectedRecordIds.length > 0 && mSelectedRecordIds.length < mTableData.length"
+                    (ngModelChange)="onButtonSelectAll($event)"
+                    [disabled]="isDisabled">{{title}}
+                </mat-checkbox><br/>
+
+                <div style="font-size: 10px; color:blue; margin-top: -5px; margin-left: 35px;">
+                    ( {{selectedRecords.length}} Selected )
+                </div>
+            </div>
+
+            <div fxFlex="40" *ngIf="showSearch">
+                <mat-form-field fxFlex="100">
+                    <input matInput type="text" autocomplete="off" #search (keyup)="onSearch(search.value)"
+                        placeholder="Type anything to search here">
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="10" *ngIf="showAddButton">
+                <button type="button" mat-icon-button
+                    (click)="onAddRecord($event)" title="Add New">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <mat-divider style="display: block;" *ngIf="inDialog"></mat-divider>
+    
+        <!-- MultiSelection Body -->
+        <mat-progress-bar color="warn" mode="query" *ngIf="loading"></mat-progress-bar>
+        
+        <div fxFlex="100" fxFill fxLayout="row wrap" fxLayoutAlign="start start" class="selection-chip-container">
+            <span [fxFlex]="itemWidth" *ngFor="let row of mTableData; let i=index"
+                style="padding: 5px; cursor: pointer;">
+                <div class="selection-chip text-overflow" 
+                    [class.chip-selected]="row.selected"
+                    (click)="onSelect(row, i)"
+                    [title]="row.text"
+                    [class.disabled]="isDisabled">
+                        {{row.text}}
+                    <div *ngIf="mTableData.length && isEpisode">{{getDate(row)}}</div>
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <div fxFlex [ngClass]="(inDialog) ? 'chi-dialog-actions' : ''" fxLayout="row" fxLayoutAlign="end center" *ngIf="inDialog">
+
+        <mat-divider style="display: block;" *ngIf="showDivider"></mat-divider>
+
+        <button *ngIf="inDialog" type="button" mat-raised-button color="warn"
+            style="margin: 0 16px;" (click)="onCancel()">Cancel
+        </button>
+
+        <button type="button" *ngIf="showOkButton"
+            mat-raised-button class="accent" style="margin-right: 24px; color: white !important;" 
+            (click)="onOkClicked($event)" [disabled]="mSelectedRecordIds.length == 0 && isEpisodeVitals">Save</button>
+
+    </div>
+</div>

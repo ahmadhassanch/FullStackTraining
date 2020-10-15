@@ -1,0 +1,32 @@
+<div fxLayout="row wrap" class="chi-dialog" style="height: 100%">
+    <div fxFlex="100" class="chi-dialog-title" fxLayout="row" fxLayoutAlign="space-between center">
+        <h1 fxFlex>File Picker and Upload File</h1>
+        <button mat-icon-button
+                matDialogClose
+                tabindex="-1">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div fxFlex fxLayout="column" style="padding: 0 10px; height: 85%;">
+
+        <!-- <div style="font-size: 14px; padding: 16px; font-weight:600;">Upload {{controlType === 'image' ? 'Image' : 'File'}}</div> -->
+        <file-dropzone fxFlex="100" [controlType]="controlType"
+            [allowedFileTypes]="allowedTypes"
+            [fileTag]="fileTag" [maxFiles]="maxFiles"
+            (updatedFiles)="onUpdateFiles($event)"
+            (uploaded)="onFileUploaded($event)">
+        </file-dropzone>
+    </div>
+
+    <div fxFlex="100" class="chi-dialog-actions" fxLayout="row" fxLayoutAlign="end center">
+
+        <button type="button" mat-raised-button color="warn"
+            style="margin: 0 16px;" matDialogClose>Cancel
+        </button>
+
+        <button type="button"
+            mat-raised-button class="green-bg" [disabled]="!selectedFile" style="margin-right: 24px; color: white !important;" 
+            (click)="onSelect()">Select</button>
+    </div>
+</div>

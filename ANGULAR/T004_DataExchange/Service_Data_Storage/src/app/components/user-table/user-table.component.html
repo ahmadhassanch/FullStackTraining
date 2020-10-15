@@ -1,0 +1,13 @@
+<h1>TABLE COMPONENT</h1>
+<button (click)="getData()">Get Data</button>
+
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+    </tr>
+    <tr *ngFor="let person of persons">
+        <td>{{person.username}}</td>
+        <td>{{person.password}}</td>
+    </tr>
+</table>

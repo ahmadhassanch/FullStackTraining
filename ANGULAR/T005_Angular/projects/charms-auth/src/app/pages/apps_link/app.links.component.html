@@ -1,0 +1,35 @@
+<div fxLayout="column" class="full-dialog-auth" style="height: 100%" style="position: relative;">
+    <div class="full-dialog-title-auth" fxLayout="row" fxLayoutAlign="space-between center">
+        <h1 fxFlex style="font-size: 25px;">Applications</h1>
+        <button mat-icon-button
+                matDialogClose
+                tabindex="-1">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div fxFlex="100" 
+        fxFill 
+        style="padding: 8px" 
+        fxLayout="row wrap" fxLayoutAlign="space-evenly end" class="login" >
+
+        <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="space-evenly end" style="margin-left: 20px; margin-bottom: 25px;">
+            <div #container fxFlex fxFlex.xs="100" *ngFor="let d of data" fxLayout="column" fxLayoutAlign="space-evenly center">
+                <div style="text-align: center;"><b>{{d.name }}</b></div>
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <mat-icon (click)="onDownloadApp(d)" style="color: #aac148;">{{d.icon}}</mat-icon>
+                </div>
+                <div>
+                    <button mat-raised-button 
+                        style="background-color: dodgerblue; color: #fff;"
+                        (click)="onDownloadApp(d)"
+                        (mouseenter)="onCopyURL(d)">
+                        <span>Download Now!</span>&nbsp;
+                        <mat-icon>get_app</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+</div>

@@ -1,0 +1,20 @@
+@mixin toolbar-theme($theme) {
+
+    $foreground: map-get($theme, foreground);
+    $is-dark: map-get($theme, is-dark);
+
+    toolbar {
+
+        .toolbar-separator {
+            background: map-get($foreground, divider);
+        }
+
+        @if ($is-dark) {
+            color: #afafaf;
+        }
+        @else
+        {
+            color: #62646a;
+        }
+    }
+}

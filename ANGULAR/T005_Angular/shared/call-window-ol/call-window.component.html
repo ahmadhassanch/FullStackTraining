@@ -1,0 +1,185 @@
+<div id="call" class="wnd-container" [class.minimized]="windowState === 0" [class.normal]="windowState === 1"
+    [class.maximized]="windowState === 2" [class.waiting-calls]="totalCallsOnWaiting.length > 0">
+
+    <div *ngIf="!is_minimized" fxLayout="row wrap" fxLayoutAlign="start start" class="cv-side-bar">
+
+        <div style="width: 100%;">
+            <div (click)="onSidebarBtn(btn)" fxLayout="row wrap" fxLayoutAlign="center center"
+                *ngFor="let btn of sidebarButtons" class="cv-side-bar-action">
+                <button mat-icon-button [id]="btn.elementId" [matTooltip]="btn.title" matTooltipPosition="right">
+                    <mat-icon>{{btn.icon}}</mat-icon>
+                </button>
+                <span fxFlex="100">{{btn.title}}</span>
+            </div>
+        </div>
+
+        <div fxFlex="100" style="height: 24px;"></div>
+
+        <div id="drawing_tools" style="width: 100%;">
+
+            <div matTooltip="Pen Color" matTooltipPosition="right">
+                <input id="btnColorPicker" type="color" value="#ff0000"
+                    style="width: 100%; background-color: transparent;">
+                <span style="width: 100%; font-size: 10px;">Pen Color</span>
+            </div>
+            <div matTooltip="Highlighter Color" matTooltipPosition="right">
+                <input id="btnHighlighter" type="color" value="#f1dd38"
+                    style="width: 100%; background-color: transparent;">
+                <span style="width: 100%; font-size: 10px;">Highlighter Color</span>
+            </div>
+
+            <div matTooltip="Pen Width" matTooltipPosition="right">
+                <select id="btnPenWidth">
+                    <option value="2" selected>2</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                    <option value="14">14</option>
+                    <option value="18">18</option>
+                </select>
+
+                <span style="width: 100%; font-size: 10px;">Width</span>
+            </div>
+
+            <div fxLayout="row wrap" fxLayoutAlign="center center" (click)="onSidebarBtn(btn)"
+                *ngFor="let btn of sidebarDrawings" class="cv-side-bar-action">
+
+                <button mat-icon-button [id]="btn.elementId" [matTooltip]="btn.title" matTooltipPosition="right">
+                    <mat-icon>{{btn.icon}}</mat-icon>
+                </button>
+                <span fxFlex="100">{{btn.title}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div fxFlex="100" fxLayout="row wrap" class="call-window">
+
+        <!-- Calls on Waiting -->
+        <div fxFlex="100" *ngIf="totalCallsOnWaiting.length > 0 && !is_minimized" class="waiting-calls-section">
+
+            <!-- No of Waiting calls-->
+            <div style="position: fixed; z-index: 1;">
+                <div class="shape">
+                    <div class="shape-text">
+                        <span style="position: absolute;top: -17px;left: 21px;">
+                            {{totalCallsOnWaiting.length}}
+                        </span>
+                        Waiting
+                    </div>
+                </div>
+            </div>
+
+            <!-- List of incoming calls -->
+            <ng-container *ngFor="let call of totalCallsOnWaiting">
+                <mat-card class="incoming-call-card" [class.cc-queue]="call.queue == 'CC'">
+                    <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                        <img fxFlex [src]="call?.image ? call?.image : '/assets/images/avatar.jpg'"
+                            class="waiting-caller-image">
+                        <div fxFlex="75">{{call?.call_from_name}}
+                            <mat-icon *ngIf="call.call_type == 'Video'">videocam</mat-icon>
+                            <mat-icon *ngIf="call.call_type == 'Audio'">mic</mat-icon>
+                        </div>
+
+                        <div fxFlex fxLayoutAlign="end start" fxLayoutGap="8px" class="no-transform">
+                            <button title="Reject Call" mat-mini-fab color="warn" (click)="onRejectQueueCall(call)">
+                                <mat-icon>call_end</mat-icon>
+                            </button>
+
+                            <button title="Accept Call" mat-mini-fab class="green-800"
+                                (click)="onAcceptQueueCall(call)">
+                                <mat-icon>call</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-card>
+            </ng-container>
+        </div>
+
+        <div class="call-container" [class.hide-me]="!showJitsiDialog">
+
+            <!-- <div *ngIf="callConnected && useMesh" style="height: 100%;">
+                <mesh-call-view style="height: 100%;" (signals)="handleCallViewSignals($event)" [actions]="actions"
+                    [AppConfig]="mAppConfig"></mesh-call-view>
+            </div> -->
+
+            <div *ngIf="callConnected" style="height: 100%;">
+                <star-call-view style="height: 100%;" [isMinimized]="is_minimized"
+                    (signals)="handleCallViewSignals($event)" [actions]="actions" [AppConfig]="mAppConfig">
+                </star-call-view>
+            </div>
+        </div>
+
+        <ng-container *ngIf="!is_minimized">
+            <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center"
+                class="header" appChiDraggableDialog [isMinimized]="windowState === 0">
+                <div class="white">{{activeCall?.call_type}} Call {{mProfile.full_name}}</div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <button mat-icon-button color="primary" (click)="restoreWindow()" *ngIf="is_maximized">
+                        <mat-icon class="white">check_box_outline_blank</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="primary" (click)="maximizeWindow()" *ngIf="is_normal">
+                        <mat-icon class="white">fullscreen</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="primary" (click)="minimizeWindow()" *ngIf="is_normal">
+                        <mat-icon class="white">indeterminate_check_box</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="!activeCall" class="no-call">No Active Call to attend.</div>
+
+            <div *ngIf="activeCall && !showJitsiDialog" class="call-not-connected"
+                [class.call-not-connected-with-waiting]="totalCallsOnWaiting.length > 0">
+                <div fxFlex="100" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="30px">
+                    <div style="padding-top: 30px;">
+                        <img [src]="activeCall?.image || '/assets/images/avatar.jpg'" class="caller-image">
+                    </div>
+
+                    <div style="text-align: center; margin-bottom: 10px;" class="call-title">
+                        {{ getTitle() }}
+                    </div>
+                    <div *ngIf="error" style="color:red;">
+                        {{errorMessage}}
+                    </div>
+
+                    <div fxFlex></div>
+
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px" *ngIf="!error"
+                        style="padding-bottom: 30px;">
+                        <button *ngIf="callState == 'InComing'" matTooltip="Reject Call" mat-fab color="warn"
+                            (click)="onRejectCall()">
+                            <mat-icon>call_end</mat-icon>
+                        </button>
+
+                        <button *ngIf="callState == 'Outgoing'" matTooltip="End Call" mat-fab color="warn"
+                            (click)="onHangUp()">
+                            <mat-icon>call_end</mat-icon>
+                        </button>
+
+                        <button *ngIf="callState == 'InComing'" matTooltip="Accept Call" mat-fab class="green-800"
+                            (click)="onAcceptCall()">
+                            <mat-icon>call</mat-icon>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </ng-container>
+
+        <div *ngIf="is_minimized" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center" class="minimized"
+            (click)="restoreWindow()">
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+                <mat-icon style="color: green;">call</mat-icon>
+                <div *ngIf="totalCallsOnWaiting.length > 0" class="badge">{{totalCallsOnWaiting.length}}</div>
+            </div>
+
+            <div>
+                <mat-icon matTooltip="Restore">fullscreen</mat-icon>
+            </div>
+        </div>
+
+    </div>
+</div>

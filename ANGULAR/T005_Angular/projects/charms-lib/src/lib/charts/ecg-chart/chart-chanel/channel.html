@@ -1,0 +1,14 @@
+<div class="bg container-cm">
+
+    <div class="cm-container-sec">
+        <img src="/assets/images/cm_graph-ic.svg" style="height: 20px;"/>
+        &nbsp;&nbsp;&nbsp;
+
+        <span class="cm-title">{{channel?.name}}</span>
+    </div>
+
+    <div #chart class="channel-container" [style.height.px]="channel.height" style="position: relative;">
+        <div class="buf-ind">{{ getDelay() }} (sec) 
+    </div>
+
+</div>

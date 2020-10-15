@@ -1,0 +1,54 @@
+.filter-options {
+    padding: 6px 6px 1px 6px;
+}
+
+.btn
+{
+    padding: 0 10px;
+    line-height: 24px;
+
+    > .mat-button-wrapper {
+        > .mat-icon {
+            font-size: 18px;
+            line-height: 24px;
+        }
+    }
+}
+
+.rotate-icon {
+    color: #9a9a9a !important;
+    transform: rotate(90deg);
+}
+
+.filter-content {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.checkbox-label>label {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.accent_icon {
+    color: #fff;
+    background-color: red;
+    border-radius: 4px;
+}
+
+.left 
+{
+    justify-content: flex-start;
+}
+
+.center 
+{
+    justify-content: center;
+}
+
+.right 
+{
+    justify-content: flex-end;
+}

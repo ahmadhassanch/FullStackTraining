@@ -1,0 +1,882 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "charms-portal": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/charms-portal",
+      "sourceRoot": "projects/charms-portal/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/charms-portal",
+            "index": "projects/charms-portal/src/index.html",
+            "main": "projects/charms-portal/src/main.ts",
+            "polyfills": "projects/charms-portal/src/polyfills.ts",
+            "tsConfig": "projects/charms-portal/tsconfig.app.json",
+            "aot": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared-styles",
+                "dist"
+              ]
+            },
+            "assets": [
+              "projects/charms-portal/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "./shared-assets",
+                "output": "./assets"
+              }
+            ],
+            "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "projects/charms-portal/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/charms-portal/src/environments/environment.ts",
+                  "with": "projects/charms-portal/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "charms-portal:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "charms-portal:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "charms-portal:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/charms-portal/src/test.ts",
+            "polyfills": "projects/charms-portal/src/polyfills.ts",
+            "tsConfig": "projects/charms-portal/tsconfig.spec.json",
+            "karmaConfig": "projects/charms-portal/karma.conf.js",
+            "assets": [
+              "projects/charms-portal/src/favicon.ico",
+              "projects/charms-portal/src/assets"
+            ],
+            "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/charms-portal/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/charms-portal/tsconfig.app.json",
+              "projects/charms-portal/tsconfig.spec.json",
+              "projects/charms-portal/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/charms-portal/e2e/protractor.conf.js",
+            "devServerTarget": "charms-portal:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "charms-portal:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "charms-clinic": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/charms-clinic",
+      "sourceRoot": "projects/charms-clinic/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/charms-clinic",
+            "index": "projects/charms-clinic/src/index.html",
+            "main": "projects/charms-clinic/src/main.ts",
+            "polyfills": "projects/charms-clinic/src/polyfills.ts",
+            "tsConfig": "projects/charms-clinic/tsconfig.app.json",
+            "aot": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared-styles",
+                "dist"
+              ]
+            },
+            "assets": [
+              "projects/charms-clinic/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "./shared-assets",
+                "output": "./assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "./shared",
+                "output": "./@shared"
+              }
+            ],
+            "styles": [
+              "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "projects/charms-clinic/src/styles.scss",
+              "node_modules/@syncfusion/ej2-base/styles/material.css",
+              "node_modules/@syncfusion/ej2-icons/styles/material.css",
+              "node_modules/@syncfusion/ej2-buttons/styles/material.css",
+              "node_modules/@syncfusion/ej2-splitbuttons/styles/material.css",  
+              "node_modules/@syncfusion/ej2-inputs/styles/material.css",
+              "node_modules/@syncfusion/ej2-lists/styles/material.css",
+              "node_modules/@syncfusion/ej2-navigations/styles/material.css",   
+              "node_modules/@syncfusion/ej2-popups/styles/material.css",         
+              "node_modules/@syncfusion/ej2-richtexteditor/styles/material.css"  
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/charms-clinic/src/environments/environment.ts",
+                  "with": "projects/charms-clinic/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "8mb",
+                  "maximumError": "8mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "charms-clinic:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "charms-clinic:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "charms-clinic:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/charms-clinic/src/test.ts",
+            "polyfills": "projects/charms-clinic/src/polyfills.ts",
+            "tsConfig": "projects/charms-clinic/tsconfig.spec.json",
+            "karmaConfig": "projects/charms-clinic/karma.conf.js",
+            "assets": [
+              "projects/charms-clinic/src/favicon.ico",
+              "projects/charms-clinic/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/charms-clinic/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/charms-clinic/tsconfig.app.json",
+              "projects/charms-clinic/tsconfig.spec.json",
+              "projects/charms-clinic/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/charms-clinic/e2e/protractor.conf.js",
+            "devServerTarget": "charms-clinic:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "charms-clinic:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "charms-patient": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/charms-patient",
+      "sourceRoot": "projects/charms-patient/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/charms-patient",
+            "index": "projects/charms-patient/src/index.html",
+            "main": "projects/charms-patient/src/main.ts",
+            "polyfills": "projects/charms-patient/src/polyfills.ts",
+            "tsConfig": "projects/charms-patient/tsconfig.app.json",
+            "aot": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared-styles",
+                "dist"
+              ]
+            },
+            "assets": [
+              "projects/charms-patient/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "./shared-assets",
+                "output": "./assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "./shared",
+                "output": "./@shared"
+              }
+            ],
+            "styles": [
+              "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "projects/charms-patient/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/charms-patient/src/environments/environment.ts",
+                  "with": "projects/charms-patient/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "charms-patient:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "charms-patient:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "charms-patient:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/charms-patient/src/test.ts",
+            "polyfills": "projects/charms-patient/src/polyfills.ts",
+            "tsConfig": "projects/charms-patient/tsconfig.spec.json",
+            "karmaConfig": "projects/charms-patient/karma.conf.js",
+            "assets": [
+              "projects/charms-patient/src/favicon.ico",
+              "projects/charms-patient/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/charms-patient/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/charms-patient/tsconfig.app.json",
+              "projects/charms-patient/tsconfig.spec.json",
+              "projects/charms-patient/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/charms-patient/e2e/protractor.conf.js",
+            "devServerTarget": "charms-patient:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "charms-patient:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "charms-auth": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/charms-auth",
+      "sourceRoot": "projects/charms-auth/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/charms-auth",
+            "index": "projects/charms-auth/src/index.html",
+            "main": "projects/charms-auth/src/main.ts",
+            "polyfills": "projects/charms-auth/src/polyfills.ts",
+            "tsConfig": "projects/charms-auth/tsconfig.app.json",
+            "aot": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared-styles"
+              ]
+            },
+            "assets": [
+              "projects/charms-auth/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "./shared-assets",
+                "output": "./assets"
+              }
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/charms-auth/src/styles.scss"
+            ],
+            "scripts": [
+              "./node_modules/clientjs/dist/client.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/charms-auth/src/environments/environment.ts",
+                  "with": "projects/charms-auth/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "charms-auth:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "charms-auth:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "charms-auth:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/charms-auth/src/test.ts",
+            "polyfills": "projects/charms-auth/src/polyfills.ts",
+            "tsConfig": "projects/charms-auth/tsconfig.spec.json",
+            "karmaConfig": "projects/charms-auth/karma.conf.js",
+            "assets": [
+              "projects/charms-auth/src/favicon.ico",
+              "projects/charms-auth/src/assets"
+            ],
+            "styles": [
+              "projects/charms-auth/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/charms-auth/tsconfig.app.json",
+              "projects/charms-auth/tsconfig.spec.json",
+              "projects/charms-auth/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/charms-auth/e2e/protractor.conf.js",
+            "devServerTarget": "charms-auth:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "charms-auth:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "charms-lib": {
+      "projectType": "library",
+      "root": "projects/charms-lib",
+      "sourceRoot": "projects/charms-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/charms-lib/tsconfig.json",
+            "project": "projects/charms-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/charms-lib/tsconfig.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/charms-lib/src/test.ts",
+            "tsConfig": "projects/charms-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/charms-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/charms-lib/tsconfig.json",
+              "projects/charms-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "charms-dev": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/charms-dev",
+      "sourceRoot": "projects/charms-dev/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/charms-dev",
+            "index": "projects/charms-dev/src/index.html",
+            "main": "projects/charms-dev/src/main.ts",
+            "polyfills": "projects/charms-dev/src/polyfills.ts",
+            "tsConfig": "projects/charms-dev/tsconfig.app.json",
+            "aot": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "shared-styles",
+                "dist"
+              ]
+            },
+            "assets": [
+              "projects/charms-dev/src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "./shared-assets",
+                "output": "./assets"
+              }
+            ],
+            "styles": [
+              "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "projects/charms-dev/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/charms-dev/src/environments/environment.ts",
+                  "with": "projects/charms-dev/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "charms-dev:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "charms-dev:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "charms-dev:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/charms-dev/src/test.ts",
+            "polyfills": "projects/charms-dev/src/polyfills.ts",
+            "tsConfig": "projects/charms-dev/tsconfig.spec.json",
+            "karmaConfig": "projects/charms-dev/karma.conf.js",
+            "assets": [
+              "projects/charms-dev/src/favicon.ico",
+              "projects/charms-dev/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/charms-dev/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/charms-dev/tsconfig.app.json",
+              "projects/charms-dev/tsconfig.spec.json",
+              "projects/charms-dev/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/charms-dev/e2e/protractor.conf.js",
+            "devServerTarget": "charms-dev:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "charms-dev:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "dashboard-designer": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": false,
+          "inlineStyle": false,
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/dashboard-designer",
+      "sourceRoot": "projects/dashboard-designer/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/dashboard-designer",
+            "index": "projects/dashboard-designer/src/index.html",
+            "main": "projects/dashboard-designer/src/main.ts",
+            "polyfills": "projects/dashboard-designer/src/polyfills.ts",
+            "tsConfig": "projects/dashboard-designer/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/dashboard-designer/src/favicon.ico",
+              "projects/dashboard-designer/src/assets"
+            ],
+            "styles": [
+              "projects/dashboard-designer/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/dashboard-designer/src/environments/environment.ts",
+                  "with": "projects/dashboard-designer/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dashboard-designer:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dashboard-designer:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dashboard-designer:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dashboard-designer/src/test.ts",
+            "polyfills": "projects/dashboard-designer/src/polyfills.ts",
+            "tsConfig": "projects/dashboard-designer/tsconfig.spec.json",
+            "karmaConfig": "projects/dashboard-designer/karma.conf.js",
+            "assets": [
+              "projects/dashboard-designer/src/favicon.ico",
+              "projects/dashboard-designer/src/assets"
+            ],
+            "styles": [
+              "projects/dashboard-designer/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dashboard-designer/tsconfig.app.json",
+              "projects/dashboard-designer/tsconfig.spec.json",
+              "projects/dashboard-designer/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/dashboard-designer/e2e/protractor.conf.js",
+            "devServerTarget": "dashboard-designer:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dashboard-designer:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "charms-portal",
+  "cli": {
+    "analytics": false
+  }
+}

@@ -1,0 +1,27 @@
+
+.filter {
+    border: 1px solid lightgray;
+    padding: 6px; 
+    margin-bottom: 24px !important; 
+    border-radius: 6px; 
+    text-align: center;
+
+    .age-filter {
+        font-weight: 900; 
+        font-size: 26px; 
+        cursor: pointer;
+        // border-right: 1px solid lightgrey;
+    }
+
+    .selected-filter {
+        color: red;
+    }
+}
+
+.dialog-container
+{
+    ::ng-deep.mat-dialog-content 
+    {
+        margin: 0 !important;
+    }
+}

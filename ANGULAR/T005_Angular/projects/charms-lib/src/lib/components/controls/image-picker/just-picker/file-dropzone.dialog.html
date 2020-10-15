@@ -1,0 +1,39 @@
+<div fxLayout="row wrap" [ngClass]="(inDialog) ? 'chi-dialog' : ''" style="height: 100%">
+    <div fxFlex="100" [ngClass]="(inDialog) ? 'chi-dialog-title' : ''" fxLayout="row" fxLayoutAlign="space-between center">
+        <h1 fxFlex>{{fileType}} Picker</h1>
+        <button *ngIf="inDialog" mat-icon-button
+                (click)="onClose()"
+                tabindex="-1">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div fxFlex fxLayout="column" style="padding: 0 10px; height: 85%;">
+
+        <cg-file-dropzone [controlType]="controlType"
+            [allowedFileTypes]="allowedFileTypes"
+            [fileTag]="fileTag"
+            maxFiles="10"
+            [maxFileSize]="maxFileSize"
+            [maxFileHeight]="maxFileHeight"
+            [maxFileWidth]="maxFileWidth"
+            (updatedFiles)="onUpdateFiles($event)">
+        </cg-file-dropzone>
+    </div>
+
+    <div fxFlex="100" [ngClass]="(inDialog) ? 'chi-dialog-actions' : ''" fxLayout="row" fxLayoutAlign="end center">
+
+        <button type="button"
+            mat-raised-button
+            color="warn"
+            style="margin-right: 24px;"
+            (click)="onClose()">Cancel</button>
+
+        <button type="button"
+                (click)="onSelect()"
+                [disabled]="selectedFiles.length == 0"
+                mat-raised-button
+                style="margin-right: 24px;"
+                color="accent">{{fromMessage ? 'Send' : 'Save'}}</button>
+    </div>
+</div>

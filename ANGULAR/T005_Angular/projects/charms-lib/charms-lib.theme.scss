@@ -1,0 +1,30 @@
+// @import "src/lib/scss/core";
+
+// @import "src/@fuse/components/material-color-picker/material-color-picker.theme";
+@import "src/lib/fuse/sidebar/sidebar.theme";
+@import "src/lib/components/controls/calendar/calendar.theme";
+@import "src/lib/components/general/general-table/general-table.theme";
+@import "src/lib/components/controls/multi-selection/multi-selection.theme";
+@import "src/lib/components/controls/image-picker/file-dropzone.theme";
+
+@mixin charms-core-theme($theme) {
+
+
+    // Theming for Fuse core styles
+    @include colors-theme($theme);
+    @include cards-theme($theme);
+    @include material-theme($theme);
+    @include page-layouts-theme($theme);
+    @include typography-theme($theme);
+
+    // Theming for Fuse components
+    @include fuse-sidebar-theme($theme);
+
+    // Theme for controls
+    @include full-dialog-theme($theme);
+    @include calendar-theme($theme);
+    @include multi-selection-theme($theme);
+    @include general-table-theme($theme);
+    @include file-dropzone-theme($theme);
+
+}

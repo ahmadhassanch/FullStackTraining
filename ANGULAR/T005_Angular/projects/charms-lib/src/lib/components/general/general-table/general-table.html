@@ -1,0 +1,249 @@
+<div class="table-container" fxFlex fxLayout="column">
+
+    <ng-container *ngIf="config.header.visible">
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="48px" class="table-header">
+            <!-- Table Heading -->
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" style="height: 59px;">
+                <span class="table-title" [ngClass]="{'small-table': config.isSmallTable}">
+                    {{config.title}}
+                </span>
+
+                <div id="search-container" *ngIf="config.header.showSearch"
+                    [@searchContainerState]="interactedWithSearch ? 'expanded' : 'collapsed'">
+                    <button *ngIf="!interactedWithSearch" mat-icon-button (click)="toggleSearch()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+
+                    <!-- <mat-form-field fxFlex="100" appearance="outline">
+                        <mat-chip-list #searchChips>
+                            <mat-chip *ngFor="let f of activeSearchFilters" removable="true" (removed)="removeSearch(f)" color="accent">
+                                <span fxLayout="row" fxLayoutGap="4px">
+                                    <span>{{f.title}}</span>
+                                    <mat-divider [vertical]="true"></mat-divider>
+                                    <span>{{f.search}}</span>
+                                </span>
+                                <mat-icon matChipRemove>cancel</mat-icon>
+                            </mat-chip>
+                            <input style="height: 32px;" placeholder="Search..." (keydown)="config.searchType=='alpha'? alphaOnly($event):true"
+                                   #searchInput
+                                   #trigger="matAutocompleteTrigger"
+                                   [formControl]="searchControl"
+                                   [matAutocomplete]="auto"
+                                   [matChipInputFor]="searchChips"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="false"
+                                   (matChipInputTokenEnd)="addFilter($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete"
+                                          (optionSelected)="filterSelected($event)">
+                            <mat-option *ngFor="let f2 of searchOptions"
+                                        [value]="f2"
+                                        [disabled]="disableSearchItems()">
+        
+                                <em>Search&nbsp;</em>
+                                <strong>{{f2.title_large}} </strong>
+                                <em> for {{searchControl.value}}</em>
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-icon matSuffix (click)="toggleSearch()">close</mat-icon>
+                    </mat-form-field> -->
+
+
+                    <mat-form-field fxFlex="100" appearance="outline">
+                        <div fxLayout="row" fxLayoutAlign="start center" style="height: 30px;">
+                            <mat-icon>search</mat-icon>&nbsp;
+                            <input fxFlex matInput name="general-table-search" [formControl]="searchControl"
+                                placeholder="Search..." (keyup.enter)="onSearchData()" type="text" autocomplete="off">
+
+                            <mat-icon matSuffix (click)="toggleSearch()">close</mat-icon>
+                        </div>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxFlex *ngIf="!config.isSmallTable && !phrViewAllBtn" fxLayout="row" fxLayoutAlign="end center"
+                fxLayoutGap="8px">
+
+                <!-- In Route Table Actions -->
+                <!-- Examples of In-Route Tables are Observation list, patients list etc -->
+                <div *ngIf="config.inRoute && config.showRowActions && selectedRow" class="row-actions">
+                    <ng-container *ngFor="let ac of tableRowActions;">
+                        <button *ngIf="!ac.visible_in_row"
+                            [ngClass]="selectedRow == null ? 'disabled-row-actions': 'active-row-actions'"
+                            class="row-action-btns" mat-flat-button (click)="onRowAction($event, ac)"
+                            [disabled]="!selectedRow">
+                            {{ ac?.toolTip }}
+                        </button>
+                    </ng-container>
+                </div>
+
+                <!-- Other Buttons -->
+                <button *ngIf="showPillDispenserBtn && selection.selected.length > 0" mat-flat-button color="primary"
+                    (click)="updateSchedule($event, selection.selected)" style="height: 36px;">
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                        Update Schedule
+                        <mat-spinner *ngIf="isLoading" color="accent" diameter="20" strokeWidth="3"></mat-spinner>
+                    </div>
+                </button>
+
+                <button *ngIf="selection.selected.length > 0" mat-flat-button color="primary"
+                    (click)="onSelectedRecords($event, selection.selected)" style="height: 36px;">
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                        {{selectionTitle}}
+                    </div>
+                </button>
+
+                <button *ngIf="showSearchCriteriaBtn" mat-flat-button color="primary"
+                    (click)="onSearchCriteriaBtnClick($event)">
+                    Search Criteria
+                </button>
+
+                <ng-container *ngIf="config.header.showToggle">
+                    <mat-slide-toggle name="slide-toggle" [checked]="config.header.toggleDefault"
+                        (change)="onToggleChange($event)">{{config.header.toggleTitle}}</mat-slide-toggle>
+                </ng-container>
+
+                <button *ngIf="config.header.showAdd && addPerms" mat-flat-button color="accent"
+                    (click)="onAdd($event)">
+                    <mat-icon>{{icon}}</mat-icon>&nbsp;{{ btnText }}
+                </button>
+
+                <button mat-stroked-button class="refresh-btn" (click)="onBtnRefresh()">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+            </div>
+
+            <a *ngIf="phrViewAllBtn" fxFlex fxLayoutAlign="end center" style="cursor: pointer; padding-right: 15px;"
+                (click)="onPHRViewAll($event)">
+                View All
+            </a>
+        </div>
+    </ng-container>
+
+
+    <div fusePerfectScrollbar [fusePerfectScrollbarOptions]="psOptions" style="overflow: auto; height: 100%;"
+        [class.fix-height]="!config.suppressScrollY">
+        <div fxFlex>
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)">
+
+                <ng-container matColumnDef="selection">
+                    <th mat-header-cell *matHeaderCellDef style="min-width: 70px !important; width: 70px !important;">
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                    </th>
+
+                    <td mat-cell *matCellDef="let row" style="min-width: 70px !important; width: 70px !important;">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <ng-container *ngFor="let col of columns" [matColumnDef]="col.name" [sticky]="col.sticky"
+                    [ngSwitch]="col.colHeaderType">
+
+                    <ng-container *ngSwitchCase="'none'">
+                        <th mat-header-cell *matHeaderCellDef [style.width]="col.width" [ngClass]="col.align">
+                            {{col.title}}</th>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'sort'">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header [style.width]="col.width"
+                            [ngClass]="col.align">{{col.title}}</th>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'advance-filter'">
+                        <th mat-header-cell *matHeaderCellDef style="cursor: pointer;" [style.width]="col.width"
+                            [ngClass]="col.align" (click)="onAdvanceFilter(col)">
+
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                &nbsp;{{col.title}}&nbsp;
+                                <mat-icon [class.accent_icon]="showAdvanceFilter">filter_list</mat-icon>
+                            </div>
+                        </th>
+                    </ng-container>
+
+                    <ng-container *ngSwitchDefault>
+                        <th mat-header-cell *matHeaderCellDef [style.width]="col.width" [ngClass]="col.align">
+                            <table-filter [column]="col" [config]="config" (signals)="onGetFilterRows($event)">
+                            </table-filter>
+                        </th>
+                    </ng-container>
+
+                    <td mat-cell *matCellDef="let row" (click)="onCellAction($event, col, row)" [ngClass]="col.align"
+                        [class.text-overflow]="col.width !== 'auto'" [class.row-height]="col.format === 'image'"
+                        [style.width]="col.width" [class.link]="col.url" [innerHtml]="cellValue(col, row)"
+                        [class.max-opacity]="col.sticky"
+                        [attr.title]="col.width !== 'auto' ? cellValue(col, row) : null">
+                    </td>
+                </ng-container>
+
+                <!-- Actions as columns -->
+                <ng-container *ngIf="!config.inRoute">
+                    <ng-container *ngFor="let ac of config.rowActions;" [matColumnDef]="ac.toolTip">
+                        <th mat-header-cell *matHeaderCellDef>{{ac.toolTip}}</th>
+
+                        <td class="row-actions-cell" mat-cell *matCellDef="let row"
+                            (click)="onRowAction($event, ac, row)">
+                            <mat-icon [ngClass]="ac.class">{{ac.icon}}</mat-icon>
+                        </td>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container matColumnDef="row_actions" [stickyEnd]="true">
+                    <th class="row-actions-cell" mat-header-cell *matHeaderCellDef></th>
+
+                    <td class="row-actions-cell" mat-cell *matCellDef="let row" (click)=$event.stopPropagation()>
+                        <ng-container *ngFor="let ac of tableRowActions;">
+                            <button *ngIf="ac.visible_in_row" mat-flat-button color="primary"
+                                [disabled]="disableActionInRow(row)" [ngClass]="ac.class"
+                                (click)="onRowAction($event, ac, row)">
+                                {{ac.toolTip}}
+                            </button>
+                        </ng-container>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="loading">
+                    <th mat-header-cell *matHeaderCellDef colspan="100%" style="border-bottom-width: 0; padding: 0;" >
+                        <mat-progress-bar color="warn" mode="query" [style.opacity]="loading ? 1 : 0">
+                        </mat-progress-bar>
+                    </th>
+                </ng-container>
+
+                <ng-container matColumnDef="error">
+                    <td mat-cell *matCellDef="let row" colspan="100%">
+                        <h3>{{row.title}}</h3>
+                        <p>{{row.message}}</p>
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-header-row *matHeaderRowDef="['loading']; sticky: true" style="height: 3px !important;"></tr>
+
+                <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)"
+                    [class.selected]="selectedRow === row" style="cursor: pointer;">
+                </tr>
+
+                <tr mat-row *matRowDef="let row; columns: ['error']; when: showError"></tr>
+
+            </table>
+        </div>
+    </div>
+
+    <ng-container *ngIf="!phrViewAllBtn">
+        <mat-paginator #paginator *ngIf="config.paging" [length]="totalRecords" class="pagination"
+            [pageSize]="config.pageSize" [pageSizeOptions]="config.pageSizeOptions" (page)="onPageChange($event)"
+            showFirstLastButtons>
+        </mat-paginator>
+    </ng-container>
+
+    <ng-container *ngIf="config.isSmallTable">
+        <mat-divider [inset]="true"></mat-divider>
+    </ng-container>
+
+</div>

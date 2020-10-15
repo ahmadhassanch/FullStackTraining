@@ -1,0 +1,153 @@
+- Activity is a full page (XML + JAVA)
+- Fragment can be a full page or a sub page (XML + JAVA)
+  > Fragment can nest another fragment 
+  > Always add the fragment in a FrameLayout
+- View smallest visible 'entity' (NO XML, Only JAVA)
+- Intent (used to transition between activities)
+  > specifies destination class and data passed.
+
+
+- Fragment Manager - interface to manage fragments inside activity
+- Fragment Transaction
+  > API to perform a set of fragment operations, similar to intent for an
+      	Intent : Activity :: FT : Fragment
+      actually 
+        Intent : Activity :: (FT+FM) : Fragment
+   Sample code for Transition to another fragment
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+	ft.replace(R.id.your_placeholder, new FooFragment());
+ 	ft.commit();
+- 
+
+
+- What are layout:
+Linear : stack horizontal or vertical 
+         can use weights
+Relative : Relative placement to each other or parent
+Table / Grid
+
+
+---------------
+
+Glossary:
+Frag. = Fragment
+----------------
+
+---------
+FRAGMENTS
+---------
+
+- A Fragment is a combination of an XML layout file and a Java class
+- Fragments encapsulate views and logic so that it is easier to reuse within activities.
+
+-------------
+WHY FRAGMENTS
+-------------
+- Reusability of View & Logic components
+- Tablet Support
+- Screen Orientation
+
+-----
+Note:
+-----
+~ Activities are sort of navigation controllers.
+ - Receiving data from intents and to pass between fragments.
+ - Hide and Show relevant fragments using fragment manager
+~ Fragments are content controller.
+ - Contains most views, event logic, layouts.
+ - Hide and Show relevant fragments using fragment manager <<<<<<<<<<<<<<<<<<<< ???
+=====================================================================================================
+------------
+Ways to add:
+------------
+- Static 
+  via adding the following code in xml:
+e.g 
+ <fragment
+        android:name="[CLASS-PATH]"
+        android:id="@+id/fooFragment"
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent" />
+
+- Dynamically 
+ Fragment Manager and Fragment Transaction Class add, remove and replacement of fragments take place.
+  
+
+ ~ XML would include a FrameLayout
+ ~ Following code is to be added in Java:
+e.g
+ FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+ ft.replace(R.id.your_placeholder, new FooFragment());
+ ft.commit();
+
+---------------- 
+FRAG. LIFECYCLE:
+----------------
+IN IMAGE FOLDER
+The most common to be overridden are;
+ ~ OnCreateView: Initialization of fragment's view[process = inflation]
+ ~ OnCreate: For Data initilization
+ ~ OnActivityCreated: For settings things that take place when Activityis fully created
+
+-----------------------------
+LOOKING FOR A FRAG. INSTANCE:
+-----------------------------
+Three ways to look/find a frag. instance:
+ ID - Lookup a fragment by calling findFragmentById on the 
+
+FragmentManager
+ Tag - Lookup a fragment by calling findFragmentByTag on the 
+
+FragmentManager
+ Pager - Lookup a fragment by calling getRegisteredFragment on a 
+
+PagerAdapter
+
+---
+ID: when frag. is given an ID, statically/dynamically then.
+---
+e.g
+ DemoFragment myFrag = (DemoFragment) 
+              getSupportFragmentManager().findFragmentById
+
+(R.id.fragmentDemo);
+---
+Tag: When frag. is added dynamically it can be given a TAG which can be 
+
+used to find ---  it later on.
+e.g
+ - Adding dynamically
+ getSupportFragmentManager().beginTransaction(). 
+           replace(R.id.flContainer, new DemoFragment(), "SOMETAG").
+              commit();
+ - Finding by tag
+ getSupportFragmentManager().findFragmentByTag("SOMETAG");
+---
+Pager: when frag. is added dynamically within an activity into ViewPager 
+
+using
+---    FragmentPagerAdapter. Then;
+e.g
+ // Returns i'th fragment item within the pager
+ adapterViewPager.getRegisteredFragment(i);
+
+--------------
+COMMUNICATION
+--------------
+
+- Fragments in general communicate through the parent activity.
+- Allowing the parent to handle the input and outputs
+- Incase of; nested child fragments & dialog fragments frags. are allowed 
+
+to communicate upward to their parent which in this case is a frag.
+
+Important Note: For frags. to stay modular, standalone and resuable Frags. 
+
+should not directly communicate with eachother. 
+
+3 ways by which frags. communicate with activity
+
+- Bundle: Activity can construct a fragment and set arguments
+- Methods: Activity can call methods 
+- Listener:

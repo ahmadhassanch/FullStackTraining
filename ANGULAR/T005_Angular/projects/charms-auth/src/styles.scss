@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Import Fuse core library
+@import "scss/partials/fonts";
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  // color: #212121;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  // background-color: #f7f7f7;
+  height: 100%;
+}
+
+body a {
+  text-decoration: none;
+}
+
+.full-dialog-container-auth .mat-dialog-container 
+{
+  background-color: #fff !important;
+  max-width: 70vw;
+  max-height: 80vh;
+  width: 70vw;
+  height: 80vh;
+  padding: 0px !important;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.full-dialog-auth 
+{
+  background-color: #fff;
+  height: 80vh;
+
+  .mat-dialog-content-auth {
+      height: calc(100vh - 110px) !important;
+      width: 100vw !important;
+      max-height: unset !important;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+  }
+
+  .full-dialog-title-auth {
+      background-color: rgb(26, 53, 129);
+      color: #fff;
+      margin: 0;
+      height: 70px;
+      padding: 8px;
+  }
+
+  .full-dialog-actions-auth {
+      background-color: rgb(26, 53, 129);
+      color: #fff;
+      margin: 0;
+      height: 50px;
+      padding: 8px 0;
+  }
+}

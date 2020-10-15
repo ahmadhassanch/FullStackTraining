@@ -1,0 +1,5 @@
+<dropzone class="dropzone-container" [config]="config" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto"
+    message="'Click or drag files here to upload'" (sending)="onSending($event)"
+    (removedFile)="onRemoveFile($event)" (addedFile)="onAddFile($event)" (error)="onUploadError($event)"
+    (success)="onUploadSuccess($event)">
+</dropzone>

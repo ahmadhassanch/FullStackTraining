@@ -1,0 +1,152 @@
+<div style="height: 100%; overflow: hidden;" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start start">
+
+    <div fxFlex="100" class="cv-top-bar" appChiDraggableDialog nestedParents="8" fxLayoutAlign="start center"
+        style="padding-left: 4px;">
+        <button style="display: none;" id="btnSelection" mat-flat-button>Select Area</button>
+        <button style="display: none;" id="btnResetSelection" mat-flat-button>End Discission</button>
+    </div>
+
+    <div fxFlex=100 class="cv-content">
+        <div id="main-app" fxFlex="100" fxLayout="row wrap" class="cv-main-view">
+        </div>
+
+        <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center" class="cv-action-bar" *ngIf="!isMinimized">
+            <div style="height: 100%; padding: 8px 12px;" fxLayoutAlign="center center">
+                <span>
+                    {{mCallDuration * 1000 | date: 'HH:mm:ss': 'UTC'}}
+                </span>
+            </div>
+
+            <ng-container>
+                <div *ngFor="let btn of bottomBarButtons" fxLayoutAlign="center center" [matTooltip]="btn.title"
+                    class="cv-action-button" [id]="btn.elementId" [style.background]="btn.color ? btn.color : ''">
+
+                    <label>
+                        <input type="checkbox" (click)="onBottomAction($event, btn)" [disabled]="!!btn.disable">
+                        <section style="height: 24px;">
+                            <span [ngClass]="btn.class" class="material-icons"></span>
+                        </section>
+                    </label>
+                </div>
+
+                <!-- <button mat-icon-button *ngFor="let btn of bottomBarButtons" fxLayoutAlign="center center"
+                    [matTooltip]="btn.title" (click)="onBottomAction($event, btn)" class="cv-action-button"
+                    [id]="btn.elementId">
+                    <mat-icon>{{btn.icon}}</mat-icon>
+                </button> -->
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<div fxFlex="100" fxLayout="row wrap" style="opacity: 0; position: absolute; bottom: 0; right: 0; border: 1px solid;">
+
+    <!-- <div fxFlex class="select">
+        <select class="select-text" id="mic_options" onchange="replaceTrack('mic')"></select>
+        <span class="select-highlight"></span>
+        <span class="select-bar"></span>
+        <label class="select-label">Mic Source</label>
+    </div>
+
+    <div fxFlex class="select">
+        <select class="select-text" id="camera_options" onchange="replaceTrack('camera')"></select>
+        <span class="select-highlight"></span>
+        <span class="select-bar"></span>
+        <label class="select-label">Camera Source</label>
+    </div>
+
+    <div fxFlex class="select">
+        <select class="select-text" id="speaker_options" onchange="replaceTrack('speaker')"></select>
+        <span class="select-highlight"></span>
+        <span class="select-bar"></span>
+        <label class="select-label">Speaker Source</label>
+    </div> -->
+
+    <!-- <label for="mic_options">Mic:</label>
+    <select name="mic" id="mic_options" onchange="replaceTrack('mic')"></select> -->
+
+    <!-- <label for="camera_options">Camera:</label>
+    <select name="camera" id="camera_options" onchange="replaceTrack('camera')"></select> -->
+
+    <!-- <label for="speaker_options">Speaker:</label>
+    <select name="camera" id="speaker_options" onchange="replaceTrack('speaker')"></select> -->
+</div>
+
+
+
+<fuse-sidebar name="more_options" position="right">
+
+    <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start start" style="padding: 8px;">
+        <!-- <div fxFlex="100" style="heightm: 24px;"></div> -->
+        <div fxFlex="100" fxLayoutAlign="end center">
+            <button mat-icon-button (click)="toggleMoreOptions()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+        <div fxFlex="100"><label>Mic Source</label></div>
+        <div fxFlex="100">
+            <select id="mic_options" style="width: 100%; height: 32px; border: 1px solid; border-radius: 4px;"
+                (change)="replaceTrack('mic')"></select>
+        </div>
+
+        <div fxFlex="100"><label>Camera Source</label></div>
+        <div fxFlex="100">
+            <select id="camera_options" style="width: 100%; height: 32px; border: 1px solid; border-radius: 4px;"
+                (change)="replaceTrack('camera')"></select>
+        </div>
+
+        <div fxFlex="100"><label>Speaker Source</label></div>
+        <div fxFlex="100">
+            <select id="speaker_options" style="width: 100%; height: 32px; border: 1px solid; border-radius: 4px;"
+                (change)="replaceTrack('speaker')"></select>
+        </div>
+
+        <!-- <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Mic Source</mat-label>
+            <mat-select id="mic_options" (selectionChange)="replaceTrack($event, 'mic')">
+                <mat-option value="Zain">Zain</mat-option>
+                <mat-option value="Javed">Javed</mat-option>
+                <mat-option value="Ali">Ali</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Camera Source</mat-label>
+            <mat-select id="camera_options" (selectionChange)="replaceTrack($event, 'camera')">
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Speaker Source</mat-label>
+            <mat-select id="speaker_options" (selectionChange)="replaceTrack($event, 'speaker')">
+            </mat-select>
+        </mat-form-field> -->
+
+    </div>
+</fuse-sidebar>
+
+<fuse-sidebar name="participants" position="right">
+    <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start start" style="padding: 8px;">
+        <!-- <div fxFlex="100" style="heightm: 24px;"></div> -->
+        <div fxFlex="100" fxLayoutAlign="end center">
+            <button mat-icon-button (click)="toggleParticipants()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+        <h1>Add Participant</h1>
+        <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Search Participant</mat-label>
+            <input matInput type="text" [matAutocomplete]="auto" [formControl]="participantControl">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAddParticipant($event)"
+                [displayWith]="displayFn.bind(this)">
+                <mat-option *ngFor="let contact of mFilteredContacts | async" [value]="contact['employee.user_id']">
+                    {{contact['employee.full_name']}}
+                </mat-option>
+            </mat-autocomplete>
+
+        </mat-form-field>
+    </div>
+
+</fuse-sidebar>

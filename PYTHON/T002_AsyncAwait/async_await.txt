@@ -1,0 +1,26 @@
+
+
+- We want to do IO operations which do not block each other, we need to run functions asynchronously
+- Solution: async, await
+
+PART I: 
+=================
+
+	- Co-routines are implemented as generators
+	- Generators are used for iteration
+	- async def func(): 
+		   	print("hello")
+
+			a = func()        .... returns a co-routine
+
+	- a.send(None), prints "hello" BUT raises exception because 
+
+	- Event loop drives co-routines WITHOUT EXCEPTIONS
+		loop = asyncio.get_event_loop();
+		loop.run_until_complete(a)
+
+		.. "hello", without exception
+
+
+PART II
+=======

@@ -1,0 +1,11 @@
+<div fxLayout="row wrap" fxFlex="100">
+    <button fxFlex="10"  *ngIf="!url" mat-icon-button  (click)="openDropzone()" tabindex="-1" style="margin-top: -4px;">
+        <mat-icon class="inner-icon" matPrefix>add_a_photo</mat-icon>
+    </button>
+
+    <input fxFlex="90" matInput readonly #myInput [value]="field.formControl.value" [required]="field.required" [formControl]="field.formControl" [placeholder]="field.title">
+
+    <button fxFlex="10" *ngIf="url" mat-icon-button (click)="onClear()" tabindex="-1">
+        <mat-icon matSuffix class="inner-icon">clear</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,27 @@
+.graph-title
+{
+    padding: 12px;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px; 
+}
+
+.graph-title-dark
+{
+    background-color: #656363;
+}
+
+.graph-title-light
+{
+    background-color: #e4e4e4;
+}
+
+.dark-theme-checkboxes
+{
+    // Checkbox border color;
+    ::ng-deep .mat-checkbox .mat-checkbox-frame 
+    {
+        border-color: gray;
+    }
+}

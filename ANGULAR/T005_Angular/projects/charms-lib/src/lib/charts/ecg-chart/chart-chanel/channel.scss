@@ -1,0 +1,93 @@
+.channel-container {
+    position: relative;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    // background-color: #eeeeee;
+}
+
+.buf-ind {    
+    font-size: 14px;
+    z-index: 200;
+    position: absolute;
+    top: -22px;
+    right: 0px;
+    color: white;
+    font-weight: bold;    
+}
+
+.buf-y-label {    
+    font-size: 14px;
+    z-index: 200;
+    position: absolute;
+    top: -22px;
+    right: 50%;
+    color: white;
+    font-weight: bold;    
+}
+
+.buf-x-label 
+{
+    font-size: 14px;
+    z-index: 200;
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    color: white;
+    font-weight: bold;
+}
+
+.bg
+{
+    background-color: #535458;
+}
+
+.container-cm
+{
+    padding: 40px 15px 20px 10px; 
+    position: relative;
+}
+
+.cm-container-sec
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #04F371;
+    width: 180px;
+    padding: 6px;
+    text-align: center;
+    color: #000;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.circle-outer
+{
+    height: 15px; 
+    width: 15px; 
+    border: 1px solid red; 
+    border-radius: 50%; 
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.circle-inner
+{
+    height: 8px;
+    width: 8px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.cm-title
+{
+    font-weight: bold; 
+    font-size: 12px; 
+    text-transform: uppercase;
+}

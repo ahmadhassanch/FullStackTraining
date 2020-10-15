@@ -1,0 +1,126 @@
+.bg
+{
+    background-color: #535458;
+}
+
+.header-container
+{
+	background-color: #535458; 
+    height: 40px;
+    width: 100%; 
+    padding: 10px;
+}
+
+.readings
+{
+    background-color: #535458; 
+    width: 100%; 
+    border: 1px solid #000;
+}
+
+.channel-container {
+    position: relative;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    background-color: #535458;
+}
+
+.title
+{
+	text-align: center; 
+	background-color: rgba(255, 255, 255, 0.3); 
+	font-size: 14px;
+	padding: 5px;
+    color: black;
+    border-bottom: 1px solid #000;
+}
+
+.data-container
+{
+	padding: 10px; 
+    text-align: center;
+    color: rgb(4, 243, 113);
+}
+
+.value
+{
+	font-size: 18px; 
+	font-weight: 700;
+}
+
+.unit
+{
+	margin-top: 10px; 
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+.color-adjustment
+{
+    border: 1px solid lightgrey; 
+    padding: 6px; 
+    border-radius: 5px;
+}
+
+.wave-content
+{
+    height: 6px; 
+    width: 20px; 
+    border-radius: 5px; 
+    margin-right: 5px;
+}
+
+.mr-right-15
+{
+    margin-right: 15px;
+}
+
+.container-cm
+{
+    padding: 40px 15px 20px 10px; 
+    position: relative;
+}
+
+.cm-container-sec
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #04F371;
+    width: 180px;
+    padding: 6px;
+    text-align: center;
+    color: #000;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.circle-outer
+{
+    height: 15px; 
+    width: 15px; 
+    border: 1px solid red; 
+    border-radius: 50%; 
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.circle-inner
+{
+    height: 8px;
+    width: 8px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.cm-title
+{
+    font-weight: bold; 
+    font-size: 12px; 
+    text-transform: uppercase;
+}

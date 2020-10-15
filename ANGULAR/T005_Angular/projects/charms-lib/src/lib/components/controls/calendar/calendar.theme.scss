@@ -1,0 +1,129 @@
+@mixin calendar-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    
+    $is-dark: map-get($theme, is-dark);
+
+    .cg-calendar {
+        
+        @if($is-dark)
+        {
+            background-color: mat-color($background);
+        }
+
+        .header 
+        {
+            .month,
+            .year,
+            .time,
+            .day {
+                color: mat-color($foreground, base);
+            }
+        }
+
+        .cg-cal-container {
+            .calendar-view {
+                .weekday {
+                    color: #8a8a8a;
+                }
+
+                .cal-day {
+                    &.out-focus {
+                        color: #ddd;
+                    }
+
+                    &.is-current {
+                        color: white;
+                        background: mat-color($accent);
+                    }
+
+                    &:hover {
+                        color: white;
+                        background: mat-color($primary, 800);
+                    }
+
+                    &.is-active {
+                        color: white;
+                        background: mat-color($primary);
+                    }
+
+                    &.is-date-disabled {
+                        // background: #f7f7f7;
+                        color: mat-color($foreground, disabled-button);
+                    }
+
+
+                }
+
+                .is-in-range {
+                    background: mat-color($primary, 300);
+                    color: white;
+
+                    &.is-current {
+                        color: white;
+                        background: mat-color($primary);
+                    }
+
+                    &.is-from {
+                        background: mat-color($primary);
+                    }
+
+                    &.is-to {
+                        background: mat-color($primary);
+                    }
+
+                    &:hover,
+                    &.is-active {
+                        color: white;
+                        background: mat-color($primary);
+                    }
+
+                    &.is-focused {
+                        color: white;
+                        background: grey;
+                    }
+                }
+
+
+            }
+
+            .month-year-view {
+
+                .cal-month,
+                .cal-year {
+                    &:hover,
+                    &.is-active {
+                        color: white;
+                        background: mat-color($primary);
+                    }
+                }
+            }
+
+            .time-view {
+                .time-header {
+                    color: mat-color($foreground, base);
+                    background: mat-color($primary);
+                }
+
+                ._time-header {
+                    color: mat-color($primary, base);
+                    background: mat-color($foreground);
+                }
+
+                .time-box {
+                    background-color: mat-color($background, base);
+                }
+            }
+        }
+
+    }
+
+    .is-focused {
+        color: white;
+        background: grey;
+    }
+}

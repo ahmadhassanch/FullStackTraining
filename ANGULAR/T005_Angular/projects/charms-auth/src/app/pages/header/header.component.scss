@@ -1,0 +1,185 @@
+// .navbar-fixed-top {
+//     top: 0;
+//     border-width: 0 0 1px;
+// }
+
+// @media (min-width: 768px){
+//     .navbar-fixed-top, .navbar-fixed-bottom {
+//         border-radius: 0;
+//     }
+// }
+
+// .navbar-fixed-top {
+//     position: fixed;
+//     right: 0;
+//     left: 0;
+//     z-index: 900;
+// }
+
+// @media (min-width: 768px){
+//     .navbar {
+//         border-radius: 4px;
+//     }
+// }
+
+// .navbar {
+//     position: relative;
+//     min-height: 50px;
+//     margin-bottom: 20px;
+//     border: 1px solid transparent;
+// }
+
+// .header{
+//     display: block;
+// }
+
+// .visible-xs, .visible-sm, .visible-md, .visible-lg {
+//     display: none !important;
+// }
+
+// .btn-group-justified {
+//     display: table;
+//     width: 100%;
+//     table-layout: fixed;
+//     border-collapse: separate;
+// }
+// .btn-group, .btn-group-vertical {
+//     position: relative;
+//     display: inline-block;
+//     vertical-align: middle;
+// }
+
+// .btn-group-justified > .btn, .btn-group-justified > .btn-group {
+//     display: table-cell;
+//     float: none;
+//     width: 1%;
+// }
+
+// .btn-group > .btn-group {
+//     float: left;
+// }
+// .btn-group, .btn-group-vertical {
+//     position: relative;
+//     display: inline-block;
+//     vertical-align: middle;
+// }
+
+// a {
+//     color: #71929D;
+//     text-decoration: none;
+//     cursor: pointer;
+//    background-color: transparent;
+// }
+
+// .btn-group-justified > .btn-group .btn {
+//     width: 100%;
+// }
+
+// .btn.btn-lg {
+//     padding: 10px 40px;
+// }
+// .btn-demo {
+//     color: white !important;
+//     background: #9c1447;
+//     margin-top: 0px;
+//     border-radius: 0px;
+// }
+// .btn-lg, .btn-group-lg > .btn {
+//     padding: 10px 16px;
+//     font-size: 18px;
+//     line-height: 1.3333333;
+//     border-radius: 0px;
+// }
+// .btn {
+//     display: inline-block;
+//     padding: 6px 12px;
+//     margin-bottom: 0;
+//     font-size: 14px;
+//     font-weight: normal;
+//     line-height: 1.42857143;
+//     text-align: center;
+//     white-space: nowrap;
+//     vertical-align: middle;
+//     -ms-touch-action: manipulation;
+//     touch-action: manipulation;
+//     cursor: pointer;
+//     -webkit-user-select: none;
+//     -moz-user-select: none;
+//     -ms-user-select: none;
+//     user-select: none;
+//     background-image: none;
+//     border: 1px solid transparent;
+//     border-radius: 0px;
+// }
+// button, input, optgroup, select, textarea {
+//     color: inherit;
+//     font: inherit;
+//     margin: 0;
+//     -moz-box-sizing: border-box;
+//     -webkit-box-sizing: border-box;
+//     box-sizing: border-box;
+// }
+// input, button, select, textarea {
+//     font-family: inherit;
+//     font-size: inherit;
+//     line-height: inherit;
+// }
+// button, html input[type="button"], input[type="reset"], input[type="submit"] {
+//     -webkit-appearance: button;
+//     cursor: pointer;
+// }
+// button, select {
+//     text-transform: none;
+// }
+// button {
+//     overflow: visible;
+// }
+// button, input, optgroup, select, textarea {
+//     margin: 0;
+//     font: inherit;
+//     color: inherit;
+// }
+// * {
+//     -webkit-box-sizing: border-box;
+//     -moz-box-sizing: border-box;
+//     box-sizing: border-box;
+// }
+// input[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button {
+//     border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+//     border-style: solid;
+//     border-width: 1px;
+//     padding: 1px 7px 2px;
+// }
+// input[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button {
+//     align-items: flex-start;
+//     text-align: center;
+//     cursor: default;
+//     color: buttontext;
+//     background-color: buttonface;
+//     box-sizing: border-box;
+//     padding: 2px 6px 3px;
+//     border-width: 2px;
+//     border-style: outset;
+//     border-color: buttonface;
+//     border-image: initial;
+// }
+
+// input, textarea, select, button {
+//     text-rendering: auto;
+//     color: initial;
+//     letter-spacing: normal;
+//     word-spacing: normal;
+//     text-transform: none;
+//     text-indent: 0px;
+//     text-shadow: none;
+//     display: inline-block;
+//     text-align: start;
+//     margin: 0em;
+//     font: 400 11px system-ui;
+// }
+// input, textarea, select, button, meter, progress {
+//     -webkit-writing-mode: horizontal-tb !important;
+// }
+// button {
+//     -webkit-appearance: button;
+// }

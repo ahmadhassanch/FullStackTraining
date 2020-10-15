@@ -1,0 +1,346 @@
+<div class="cg-calendar"  [class.compact]="compact">
+
+    <div class="header" *ngIf="currentView !== 'time'">
+        <div fxLayoutAlign="start center" style="font-weight: 600;">
+            <mat-icon style="margin-right: 5px;">date_range</mat-icon>
+            <!-- <mat-label>Confirm Date</mat-label> -->
+        </div>
+
+        <button [disabled]="currentView === 'time'"
+                tabindex="3"
+                mat-icon-button="mat-icon-button"
+                type="button"
+                color="primary"
+                (click)="previous()">
+            <mat-icon class="mat-18">chevron_left</mat-icon>
+        </button>
+        
+        <button class="month"  #months
+                tabindex="5"
+                [class.active]="currentView === 'months'"
+                (click)="onClickMonthButton($event)"
+                (keyup.Enter)="onClickMonthButton($event)">{{dateFocused | date: 'MMMM'}}
+        </button>
+        <button class="year"  #years
+                tabindex="6"
+                [class.active]="currentView === 'years'"
+                (click)="onClickYearButton($event)"
+                (keyup.Enter)="onClickYearButton($event)">{{dateFocused | date: 'y'}}
+        </button>
+        <button *ngIf="type !== 'date' && currentView !== 'time'" #time
+                tabindex="7"
+                class="time"
+                [class.active]="currentView === 'time'"
+                (click)="onClickTimeButton($event)">{{timeFormat=='24' ? (dateFocused | date: 'HH:mm') : (dateFocused | date: 'h:mm')}}
+        </button>
+        <button [disabled]="currentView === 'time'"
+                tabindex="8"
+                mat-icon-button="mat-icon-button"
+                color="primary"
+                type="button"
+                (click)="next()">
+            <mat-icon class="mat-18">chevron_right</mat-icon>
+        </button>
+    </div>
+
+    <div class="cg-cal-container"
+         fxLayout="row wrap"
+         fxLayoutAlign="space-between start">
+
+
+        <ng-container *ngIf="currentView === 'calendar'" >
+            <div  class="calendar-view" #calendarView tabindex="1" fxFlex="100"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="space-around center"
+                  (keyup.Enter)="selectDate(dateFocused)">
+                <span class="weekday"
+                      *ngFor="let day of dayNames;">
+                      {{ day }}
+                </span>
+
+                <mat-divider [inset]="true" style="margin-top: 5px;"></mat-divider>
+
+                <div class="cal-day"
+                     *ngFor="let date of dates"
+                     [class.is-date-disabled]="isDateDisabled(date)"
+                     [class.is-in-range]="isInRange(date)"
+                     [class.is-active]="isSelected(date)"
+                     [class.is-focused]="isFocused(date)"
+                     [class.is-current]="isCurrent(date)"
+                     [class.is-from]="isFrom(date)"
+                     [class.is-to]="isTo(date)"
+                     [class.out-focus]="date.getMonth() !== dateFocused.getMonth()"
+                     (click)="selectDate(date)">
+                    <span [class.pr-1]="setCenter(date)">{{ date | date: 'd' }}</span>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="currentView === 'months'" >
+            <div class="month-year-view" #monthsView tabindex="1"
+                 (keyup.Enter)="onMonthSelected(dateFocused.getMonth())"
+                 fxLayout="row wrap"
+                 fxLayoutAlign="space-around center">
+                <div class="cal-month"
+                     fxFlex="32"
+                     [class.is-active]="i == myDate.getMonth()"
+                     [class.is-focused]="i == dateFocused.getMonth()"
+                     *ngFor="let month of monthNames; let i=index;"
+                     (click)="onMonthSelected(i)">{{ month }}</div>
+            </div>
+        </ng-container>
+
+        <ng-container  *ngIf="currentView === 'years'" >
+            <div class="month-year-view" #yearsView tabindex="1"
+                 fxLayout="row wrap"
+                 fxLayoutAlign="space-around center"
+                 (keyup.Enter)="onYearSelected(dateFocused.getFullYear())">
+                <div class="cal-year"
+                     fxFlex="32"
+                     [class.is-active]="year ==  myDate.getFullYear()"
+                     [class.is-focused]="year == dateFocused.getFullYear()"
+                     *ngFor="let year of years;"
+                     (click)="onYearSelected(year)">{{ year }}</div>
+            </div>
+        </ng-container>
+
+        <ng-container  *ngIf="currentView === 'time'" >
+            <div *ngIf="calendarType === 'Slider'" class="time-view" fxFlex="100"
+                 fxLayout="column"
+                 fxLayoutAlign="center center"
+                 [class.time-view-comp]="!showTodayButton"
+                 #timeView>
+                <mat-button-toggle-group [(ngModel)]="timeFormat">
+                    <mat-button-toggle
+                                        [ngClass]="timeFormat=='12' ? 'time-header' : '_time-header'"
+                                       value="12"
+                                       (click)="onHourFormateChange('12')">
+                        12 hrs
+                    </mat-button-toggle>
+                    <mat-button-toggle [ngClass]="timeFormat=='24' ? 'time-header' : '_time-header'"
+                                       value="24"
+                                       (click)="onHourFormateChange('24')">
+                        24 hrs
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+                <div class="format"
+                    *ngIf="timeFormat == '12'"
+                    (click)="onChangeMeridiem()">{{Meridiem}}</div>
+                <div fxLayout="row"
+                     fxLayoutGap="10px"
+                     fxLayoutAlign="center end"
+                     style="margin-top:10px;">
+                    <span class="time-box">{{hours}}</span>
+                    <span style="font-size:20px; font-weight:700;padding: 5px;">:</span>
+                    <span class="time-box">{{minutes}}</span>
+
+                </div>
+                <span class="hour-min-text" >Hour</span>
+                <mat-slider style="width: 100%;margin-top: -10px;"
+                            [min]="timeFormat == '12' ? '01' : '00'"
+                            color="primary"
+                            [max]="timeFormat == 12 ? '12' : '23'"
+                            [(ngModel)]="hours"
+                            (input)="onHourInputChange($event)"
+                            (change)="onHourInputChange($event)"></mat-slider>
+                <span class="hour-min-text">Minute</span>
+                <mat-slider style="width: 100%;margin-top: -10px;"
+                            [min]="00"
+                            color="primary"
+                            [step]="5"
+                            [max]="55"
+                            [(ngModel)]="minutes"
+                            (input)="onMinuteChange($event.value)"
+                            (change)="onMinuteChange($event.value)"></mat-slider>
+                <button mat-icon-button
+                        color="primary"
+                        type="button"
+                        (click)="onTimeSelected($event)">
+                    <mat-icon color="primary" class="mat-18">check</mat-icon>
+                </button>
+
+            </div>
+
+            <time 
+                *ngIf="calendarType === 'Standard'" 
+                class="time-container time-view"
+                #timeView>
+
+                <!-- Time Formate Section -->
+                <div class="time-format-section">
+                    <mat-button-toggle-group style="width: 100%;" [(ngModel)]="timeFormat">
+                        <mat-button-toggle style="width: 50%;"
+                                            [ngClass]="timeFormat=='12' ? 'time-header' : '_time-header'"
+                                            value="12"
+                                            (click)="onHourFormateChange('12')">
+                            12 hrs
+                        </mat-button-toggle>
+                        <mat-button-toggle 
+                                            style="width: 50%;"
+                                            [ngClass]="timeFormat=='24' ? 'time-header' : '_time-header'"
+                                            value="24"
+                                            (click)="onHourFormateChange('24')">
+                            24 hrs
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+
+                <div class="divider">
+                    <mat-divider [inset]="true"></mat-divider>
+                </div>                     
+
+                <!-- Actual Time -->
+                <div class="time" fxLayout="row">
+                    <!-- Hours Section -->
+                    <div fxLayout="column" class="time-section">
+                        <button 
+                                tabindex="-1"
+                                mat-icon-button 
+                                color="accent" 
+                                [disabled]="timeFormat === '12' ? hours >= 12 : hours >= 23" 
+                                (click)="incraseTime('hours')">
+                                <mat-icon>keyboard_arrow_up</mat-icon>
+                        </button>
+
+                        <div fxLayout="row">
+                            <mat-form-field style="width: 33px; margin-right: 1px;" fxLayoutGap="1px" appearance="outline">
+                                <input  
+                                        tabindex="1"
+                                        #istHoursField
+                                        matInput 
+                                        maxlength="1"
+                                        [ngModel]="hours.toString()[0]" 
+                                        autocomplete="off"
+                                        (input)="onHourInputChange(istHoursField, 'istHour')"
+                                        (focus)="onHourFieldFocus($event)"
+                                        (blur)="onBlur('istHour')"
+                                        (keyup.enter)="onHourEnterPress($event)"
+                                        (keydown)="validateTime($event, istHoursField.value, 'hours', 'istHour')"
+                                        >
+                            </mat-form-field>
+                            <mat-form-field style="width: 33px;" appearance="outline">
+                                <input  
+                                        tabindex="1"
+                                        #secondHoursField
+                                        matInput 
+                                        maxlength="1"
+                                        [ngModel]="hours.toString()[1]" 
+                                        autocomplete="off"
+                                        (input)="onHourInputChange(secondHoursField, 'secondHour')"
+                                        (focus)="onHourFieldFocus($event)"
+                                        (blur)="onBlur('secondHour')"
+                                        (keyup.enter)="onHourEnterPress($event)"
+                                        (keydown)="validateTime($event, secondHoursField.value, 'hours', 'secondHour')"
+                                        >
+                            </mat-form-field>
+                        </div>
+                        
+                        <button 
+                                tabindex="-1"
+                                mat-icon-button
+                                color="accent"
+                                [disabled]="timeFormat === '12' ? hours <= 1 : hours <= 0" 
+                                (click)="decreaseTime('hours')">
+                                <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                    </div>
+                    
+                    <!-- Times Separator -->
+                    <span class="time-colon-separator">:</span>
+    
+                    <!-- Minutes Section -->
+                    <div fxLayout="column" class="time-section">
+                        <button 
+                                tabindex="-1"
+                                mat-icon-button 
+                                color="accent" 
+                                [disabled]="minutes === 59 || minutes === '59'"
+                                (click)="incraseTime('minutes')">
+                                <mat-icon>keyboard_arrow_up</mat-icon>
+                        </button>
+
+                        <div fxLayout="row" fxLayoutGap="1px">
+                            <mat-form-field style="width: 33px; margin-right: 1px;" appearance="outline">
+                                <input 
+                                    tabindex="1"
+                                    #istMinutesField 
+                                    matInput
+                                    maxlength="1" 
+                                    [ngModel]="minutes.toString()[0]" 
+                                    autocomplete="off"
+                                    (input)="onMinuteChange(istMinutesField.value, 'istMinute')"
+                                    (focus)="onMinuteFieldFocus($event, 'istMinute')"
+                                    (blur)="onBlur('istMinute')"
+                                    (keyup.enter)="onTimeSelected($event)"
+                                    (keydown)="validateTime($event, istMinutesField.value, 'minutes', 'istMinute')">
+                            </mat-form-field>
+                            <mat-form-field style="width: 33px" appearance="outline">
+                                <input 
+                                    tabindex="1"
+                                    #secondMinutesField 
+                                    matInput 
+                                    maxlength="1"
+                                    [ngModel]="minutes.toString()[1]" 
+                                    autocomplete="off"
+                                    (input)="onMinuteChange(secondMinutesField.value, 'secondMinute')"
+                                    (focus)="onMinuteFieldFocus($event, 'secondMinute')"
+                                    (blur)="onBlur('secondMinute')"
+                                    (keyup.enter)="onTimeSelected($event)"
+                                    (keydown)="validateTime($event, secondMinutesField.value, 'minutes', 'secondMinute')">
+                            </mat-form-field>
+                        </div>
+
+                        <button 
+                                tabindex="-1"
+                                mat-icon-button 
+                                color="accent"
+                                [disabled]="minutes === 0 || minutes === 00 || minutes === '00'"
+                                (click)="decreaseTime('minutes')">
+                                <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                    </div>
+
+                    <!-- AM/PM -->
+                    <div fxLayout="column" *ngIf="timeFormat == '12'" class="AM-PM">
+                        <button 
+                                tabindex="-1"
+                                mat-icon-button 
+                                color="accent" 
+                                (click)="onChangeMeridiem()">
+                                <mat-icon>keyboard_arrow_up</mat-icon>
+                        </button>
+                        <div style="margin: 10px 0; text-transform: uppercase;">{{meridiem}}</div>
+                        <button 
+                                tabindex="-1"
+                                mat-icon-button 
+                                color="accent" 
+                                (click)="onChangeMeridiem()">
+                                <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="divider">
+                    <mat-divider [inset]="true"></mat-divider>
+                </div>
+
+                <!-- Action Buttons -->
+                <div fxLayoutAlign="end" fxLayoutGap="10px" style="margin: 0 10px 10px 0;">
+                   
+                    <button mat-raised-button color="warn" tabindex="-1" (click)="onCancel()">Cancel</button>
+                    <button mat-raised-button color="primary" tabindex="-1" (click)="onTimeSelected($event)">Set</button>
+                </div>
+            </time>
+        </ng-container>
+
+        <button fxFlex="100"
+            tabindex="2"
+            type="button"
+            mat-button
+            *ngIf="currentView !== 'time' && showTodayButton==true"
+            color="primary"
+            (click)="selectToday()"
+            style="margin:2px">Today
+        </button>
+    </div>
+</div>

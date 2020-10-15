@@ -1,0 +1,125 @@
+@mixin full-dialog-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+
+    .full-dialog-container .mat-dialog-container {
+        background-color: map-get($foreground, dialog);
+        max-width: 100vw;
+        max-height: 100vh;
+        width: 100vw;
+        height: 100vh;
+        padding: 0px !important;
+        overflow: hidden;
+        border-radius: 0;
+    }
+
+    .full-dialog {
+        background-color: map-get($foreground, dialog);
+        height: 100vh;
+
+        > .mat-dialog-content {
+            height: calc(100vh - 110px) !important;
+            width: 100vw !important;
+            max-height: unset !important;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .full-dialog-title {
+            background-color: mat-color($background, background);
+            color: mat-color($primary, default-contrast);
+            // border-bottom: 2px solid mat-color($accent);
+            margin: 0;
+            height: 60px;
+            padding: 0 16px 0 24px;
+        }
+
+        .full-dialog-actions {
+            background-color: mat-color($background, background);
+            color: mat-color($primary, default-contrast);
+            margin: 0;
+            height: 50px;
+            padding: 8px 0;
+        }
+    }
+
+    .chi-dialog-container .mat-dialog-container {
+        background-color: map-get($foreground, dialog);
+        max-width: 100%;
+        max-height: 100vh;
+        // width: 100vw;
+        height: 100vh;
+        padding: 0px !important;
+        overflow: hidden;
+        border-radius: 0;
+    }
+
+    .chi-dialog {
+        background-color: map-get($foreground, dialog);
+
+        .mat-dialog-content {
+            height: calc(100vh - 110px) !important;
+            // width: 100vw !important;
+            max-height: unset !important;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chi-dialog-title {
+            background-color: mat-color($background, background);
+            color: mat-color($primary, default-contrast);
+            // border-bottom: 2px solid mat-color($accent);
+            margin: 0;
+            height: 60px;
+            padding: 0 16px 0 24px;
+        }
+
+        .chi-dialog-actions {
+            background-color: mat-color($background, background);
+            color: mat-color($primary, default-contrast);
+            margin: 0;
+            height: 50px;
+            padding: 8px 0;
+        }
+    }
+
+    .chi-report-container .mat-dialog-container {
+        background-color: map-get($foreground, dialog) !important;
+        max-width: 100%;
+        max-height: 100vh;
+        // width: 100vw;
+        height: 80vh;
+        padding: 0px !important;
+        overflow: hidden;
+        border-radius: 0;
+    }
+
+    .chi-report-panel .mat-dialog-container {
+        background-color: map-get($foreground, dialog) !important;
+        max-width: 100%;
+        max-height: 100vh;
+        // width: 100vw;
+        // height: 80vh;
+        padding: 0px !important;
+        overflow: hidden;
+        border-radius: 0;
+    }
+
+    .chi-custom-height-container .mat-dialog-container {
+        background-color: map-get($background, background) !important;
+        max-width: 100%;
+        max-height: 80vh;
+        // width: 100vw;
+        // height: 80vh;
+        padding: 0px !important;
+        overflow: hidden;
+        border-radius: 0;
+    }
+
+}

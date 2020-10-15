@@ -1,0 +1,27 @@
+<div style="padding-bottom: 16px; cursor: pointer;">
+    <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.1);"
+        [style.width]="width"
+        [style.height.px]="height">
+
+        <div fxLayout="column"
+             (click)="onPickerClick()">
+            <span [innerText]="placeholder"
+                  style="color: rgba(0, 0, 0, 0.38);  font-size: 12px;">
+            </span>
+
+            <div fxLayout="row nowrap"
+                 fxLayoutAlign="center center">
+                <div fxFlex>
+                    <img [src]="previewImage()"
+                         style="width: auto;"
+                         [style.height.px]="(height-24)" />
+                </div>
+                <div fxFlex="nogrow">
+                    <mat-icon style="top: 25%; position: relative;">keyboard_arrow_down</mat-icon>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>

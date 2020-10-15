@@ -1,0 +1,126 @@
+<div fxLayout="row wrap" class="container-bg">
+
+    <div fxLayout="row wrap" fxFlex="50" fxLayoutAlign="start start" style="padding: 128px; color: #fff;">
+        <div>
+            <img fxFlex src="/assets/images/logo.png" alt="image" class="logo">
+        </div>
+        <div fxFlex="100" class="title">Welcome to the RadarView360</div>
+        <div fxFlex="100">21<sup>st</sup> Century Complete Field Service Managemant Solution </div>
+    </div>
+
+    <div fxLayout="row wrap" fxFlex="50" style="height: 100%; overflow-y: scroll !important;">
+        <form [formGroup]="theForm" (ngSubmit)="onSubmit()" fxLayout="column" fxFlex="100"
+            style="background: #fff; padding: 64px;" fxFlexOrder.lt-md="1">
+            <h1 fxFlex="100" style="text-transform: uppercase; font-size: 24px;">Create An Account</h1>
+
+            <div fxFlex="100">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Business Name</mat-label>
+                    <input matInput type="text" formControlName="company_name" placeholder="Business Name">
+                    <mat-icon matSuffix class="suffix_icon_collor">business</mat-icon>
+                    <mat-error *ngIf="company_name.hasError('required')">Business Name is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="100">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Select Industry</mat-label>
+                    <mat-select placeholder="Select Industry" formControlName="company_type_id">
+                        <mat-option *ngFor="let ct of companyTypes" value="{{ct.company_type_id}}">{{ct.company_type_name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="company_type_id.hasError('required')">Industry name is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="100">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Full Name</mat-label>
+                    <input matInput type="text" formControlName="first_contact" placeholder="Full Name">
+                    <mat-icon matSuffix class="suffix_icon_collor">account_circle</mat-icon>
+                    <mat-error *ngIf="first_contact.hasError('required')">Full Name is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <!-- <div fxFlex="100">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Second Contact</mat-label>
+                    <input matInput type="text" formControlName="second_contact" placeholder="Second Contact">
+                    <mat-icon matSuffix class="suffix_icon_collor">account_circle</mat-icon>
+                    <mat-error *ngIf="second_contact.hasError('required')">Second Contact is required</mat-error>
+                </mat-form-field>
+            </div> -->
+
+            <div fxFlex="100">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" placeholder="Email">
+                    <mat-icon matSuffix class="suffix_icon_collor">mail</mat-icon>
+                    <mat-error *ngIf="email.hasError('required')">email is required</mat-error>
+                    <mat-error *ngIf="email.hasError('email')">Please provide a valid email</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="100">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput type="number" min="0" formControlName="mobile" placeholder="Mobile Number">
+                    <mat-icon matSuffix class="suffix_icon_collor">phone_android</mat-icon>
+                    <mat-error *ngIf="mobile.hasError('required')">Mobile Number is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="100">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password" placeholder="Password">
+                    <mat-icon matSuffix class="suffix_icon_collor">vpn_key</mat-icon>
+                    <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="100">
+                <mat-form-field fxFlex appearance="outline">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+                    <mat-icon matSuffix class="suffix_icon_collor">vpn_key</mat-icon>
+                    <mat-error *ngIf="confirmPassword.hasError('required')">Confirm Password is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="100" fxLayoutAlign="center center">
+                <mat-checkbox formControlName="accept_terms">Accept <a href="https://www.radarview360.com/company-usage-policy.html" target="blank">Terms and Conditions</a></mat-checkbox>
+            </div>
+
+            <div fxFlex="100" fxLayoutAlign="center center" style="height: 16px;">
+                <mat-error style="font-size: 75%;" *ngIf="accept_terms.hasError('required') && accept_terms.dirty">Please Accept Terms and Conditions</mat-error>
+            </div>
+
+            <div fxFlex="100" fxLayoutAlign="center center">
+                <re-captcha (captchaResponse)="captchaResponse($event)"
+                [site_key]="googleSiteKey"></re-captcha>
+            </div>
+
+            <div fxFlex="100" fxLayoutAlign="center center" *ngIf="signupError">
+                <mat-error>{{signupError}}</mat-error>
+            </div>
+
+            <div fxFlex="100" fxLayoutAlign="center center">
+                <button fxFlex="30" type="submit" style="margin-top: 20px;" [disabled]="!theForm.valid || formSubmit"
+                    mat-raised-button color="accent">
+
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                        <span>Let's Go</span>
+                        <mat-spinner *ngIf="formSubmit" color="accent" diameter="20" strokeWidth="3">
+                        </mat-spinner>
+                    </div>
+                </button>
+            </div>
+
+            <div fxFlex="100" fxLayoutAlign="center center" style="height: 16px;"></div>
+            <div fxFlex="100" fxLayoutAlign="center center" style="height: 24px">
+                Already have an account? 
+                <a routerLink="/">&nbsp;Login</a>
+            </div>
+        </form>
+    </div>
+</div>

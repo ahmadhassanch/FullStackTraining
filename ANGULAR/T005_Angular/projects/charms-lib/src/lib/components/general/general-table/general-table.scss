@@ -1,0 +1,236 @@
+:host {
+    width: 100%;
+}
+
+.table-container
+{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    table {
+        width: 100%;
+    }
+
+    .table-title
+    {
+        padding: 10px 6px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .table-header 
+    {
+        padding: 5px;
+    }
+
+    tr.mat-header-row
+    {
+        height: 30px;
+        background-color: #686868;
+    }
+
+    td.mat-cell:first-child, 
+    th.mat-header-cell:first-child {
+        padding-left: 15px;
+    }
+
+    td.mat-cell:last-child, 
+    th.mat-header-cell:last-child {
+        padding-right: 15px;
+    }
+      
+    td.mat-cell,
+    td.mat-header-cell
+    {
+        word-wrap: initial;
+        padding: 0px 5px;
+        line-break: unset;
+        height: 28px;
+        line-height: 28px;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: middle;
+        min-width: 120px;
+
+        &.link:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    td.mat-cell:last-child,
+    th.mat-header-cell:last-child {
+        border-right-width: 0;
+    }
+
+    tr.mat-row {
+        height: 30px;
+    }
+
+    tr.mat-row:last-child {
+        > td.mat-cell {
+            border-bottom-width: 0;
+        }
+    }
+
+    // Selected Row Style
+    .selected
+    {
+        // > td {
+        //     color: #000000 !important;
+        // }
+        background-color: #697C94 !important;
+    }
+
+    .row-actions
+    {
+        ::ng-deep .mat-flat-button
+        {
+            background-color: unset !important;
+        }
+
+        .row-action-btns
+        {
+            font-size: 12px;
+            padding: 0 8px;
+        }
+    }
+
+    th.row-actions-cell, td.row-actions-cell {
+        width: 40px;
+        min-width: 40px;
+        height: 30px;
+        padding-right: 0 !important;
+
+        > .mat-flat-button
+        {
+            line-height: 23px;
+            font-size: 11px;
+            padding: 0 8px;
+        }
+
+        > .mat-table-sticky
+        {
+            background: none;
+        }
+    }
+
+    .mat-stroked-button.compact {
+        padding: 0 8px;
+    }
+
+    .mat-icon.compact {
+        width: 20px;
+    }
+
+    .mr-10 {
+        margin-right: 10px !important;
+    }
+
+    .left {
+        text-align: left;
+    }
+
+    .fix-height {
+        flex: 1 1 1e-09px;
+    }
+
+    .right {
+        text-align: right;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .image {
+        min-width: 70px !important;
+        max-width: 70px !important;
+        cursor: pointer;
+    }
+
+    .small-table {
+        font-size: 16px;
+        max-width: 56px;
+        line-height: 20px;
+        margin-right: 10px !important;
+    }
+
+    .small-table-btn {
+        padding: 0;
+        min-width: 36px;
+    }
+
+    .max-opacity {
+        opacity: 1 !important;
+    }
+
+    .pagination {
+        border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+        border-radius: 0 0 4px 4px;
+
+        ::ng-deep .mat-form-field {
+            height: 40px;
+            margin-bottom: 12px;
+
+        }
+
+        ::ng-deep.mat-form-field-flex > .mat-form-field-infix { padding: 0.1em 0 0.6em 0px !important; }
+        ::ng-deep.mat-form-field-label-wrapper { top: -1.3em; }
+        ::ng-deep.mat-paginator-outer-container {  height: 45px !important; }
+        ::ng-deep.mat-paginator-container { min-height: 45px !important; }
+
+        ::ng-deep.mat-paginator-page-size {
+            height: 45px !important;
+            align-items: center !important;
+        }
+    }
+
+    #search-container {
+        width: 40px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        transition: width 0.5s ease; 
+
+        ::ng-deep .mat-form-field-wrapper
+        {
+            padding-bottom: 0 !important;
+
+            > .mat-form-field-flex
+            {
+                > .mat-form-field-infix
+                {
+                    padding: 0 !important;
+                    margin-bottom: 5px !important;
+                    margin-top: -5px !important;
+                }
+
+                > .mat-form-field-suffix {
+                    top: 0.5em !important;
+                }
+            }
+        }
+    }
+
+    .text-overflow 
+    {
+        // display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .row-height 
+    {
+        height: auto !important;
+    }
+
+    .accent_icon
+    {    
+        color: #fff;
+        background-color: red;
+        border-radius: 4px;
+    }
+}

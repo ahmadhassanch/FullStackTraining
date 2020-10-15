@@ -1,0 +1,161 @@
+<div fxLayout="column" fxLayoutGap="8px" style="height: 100%;">
+    <div fxLayout="column" fxLayoutGap="8px" style="height: 100%;">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center"
+            style="padding-left:8px; background: #62646a; border-radius: 4px;">
+            <h2 style="margin: 0;">{{formTitle}}</h2>
+
+            <div class="primary" style="border-radius: 4px;">
+                <button mat-icon-button matDialogClose tabindex="-1">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <span fxFlex style="font-size: 24px; padding: 16px;">{{formTitle}}</span>
+            <button type="button" mat-icon-button (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-divider fxFlex="100" [inset]="true"></mat-divider>
+        </div> -->
+
+        <div fxFill fxFlex style="overflow: hidden;">
+            <div fxLayout="row wrap" fxLayoutAlign="space-between start" fusePerfectScrollbar
+                [fusePerfectScrollbarOptions]="psOptions" style="height: 100%; padding: 0 16px; overflow: auto;">
+
+                <ng-container *ngFor="let col of formFields; let i=index" [ngSwitch]="col.type">
+
+                    <ng-container *ngIf="col.name !== foreignKey">
+                        <div *ngSwitchCase="'hidden'" fxFlex="0" style="display: hidden;">
+                        </div>
+
+                        <div *ngSwitchCase="'checkbox'" [fxFlex]="col.width" style="margin: 12px 0 !important;">
+                            <mat-checkbox color="primary" [formControl]="col.formControl" [required]="col.required">
+                                {{col.title}}
+                            </mat-checkbox>
+
+                        </div>
+
+                        <div *ngSwitchCase="'textarea'" [fxFlex]="col.width"
+                            [class.translation-icon]="col.allow_translation">
+                            <mat-form-field fxFlex="100" appearance="outline">
+                                <mat-label>{{col.title}}</mat-label>
+                                <textarea matInput rows="3" [formControl]="col.formControl" [required]="col.required">
+                                    </textarea>
+                                <mat-hint *ngIf="col.hint != null"> {{col.hint}}</mat-hint>
+                                <mat-error *ngIf="col.formControl.invalid"> {{col.error}} </mat-error>
+
+                                <mat-icon *ngIf="col.allow_translation" matSuffix
+                                    (click)="doTranslation(col.name, col.formControl.value)" style="align-self: center;"
+                                    color="accent" matTooltip="Add Translation">translate
+                                </mat-icon>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div *ngSwitchCase="'radio'" [fxFlex]="col.width">
+                            <mat-radio-group [formControl]="col.formControl">
+                                <mat-radio-button *ngFor="let opt of col.options"
+                                    style="margin: 5px; padding: 0 !important;" color="primary" [value]="opt">{{opt}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+
+                        <div *ngSwitchCase="'dropdown'" [fxFlex]="col.width">
+                            <mat-form-field fxFlex="100" appearance="outline">
+                                <mat-label>{{col.title}}</mat-label>
+                                <mat-select [required]="col.required" [formControl]="col.formControl">
+                                    <mat-option *ngFor="let opt of col.options" [value]="opt">{{opt}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div *ngSwitchCase="'switch'" [fxFlex]="col.width" style="margin: 12px !important;">
+                            <mat-slide-toggle [required]="col.required" [formControl]="col.formControl">{{col.title}}
+                            </mat-slide-toggle>
+                        </div>
+
+                        <div *ngSwitchCase="'foreign'" [fxFlex]="col.width" fxLayout="column">
+                            <mat-form-field fxFlex="100" appearance="outline">
+                                <mat-label>{{col.title}}</mat-label>
+                                <chi-select [config]="config" [field]="col" (selected)="onForeignSelected($event, col)">
+                                </chi-select>
+                                <mat-hint *ngIf="col.hint != null"> {{col.hint}}</mat-hint>
+                                <mat-error *ngIf="col.formControl.invalid"> {{col.error}} </mat-error>
+
+                            </mat-form-field>
+                        </div>
+
+                        <div *ngSwitchCase="'date'" [fxFlex]="col.width" fxLayout="column">
+                            <mat-form-field fxFlex="100" appearance="outline">
+                                <mat-label>{{col.title}}</mat-label>
+                                <chi-date-picker [field]="col" [min]="col.min_date"
+                                    (selected)="onDateSelected($event, col)"></chi-date-picker>
+                                <mat-hint *ngIf="col.hint != null"> {{col.hint}}</mat-hint>
+                                <mat-error *ngIf="col.formControl.invalid"> {{col.error}} </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div *ngSwitchCase="'time'" [fxFlex]="col.width" fxLayout="column">
+                            <mat-form-field fxFlex="100" appearance="outline">
+                                <mat-label>{{col.title}}</mat-label>
+                                <chi-time-picker [field]="col" (selected)="onDateSelected($event, col)">
+                                </chi-time-picker>
+                                <mat-hint *ngIf="col.hint != null"> {{col.hint}}</mat-hint>
+                                <mat-error *ngIf="col.formControl.invalid"> {{col.error}} </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div *ngSwitchCase="'file'" [fxFlex]="col.width" fxLayout="column">
+                            <mat-form-field fxFlex="100" appearance="outline">
+                                <chi-file-picker [field]="col" (selected)="onDateSelected($event, col)">
+                                </chi-file-picker>
+                                <mat-hint *ngIf="col.hint != null"> {{col.hint}}</mat-hint>
+                                <mat-error *ngIf="col.formControl.invalid"> {{col.error}} </mat-error>
+                            </mat-form-field>
+                        </div>
+
+
+                        <!-- *ngIf="col.type === 'text' || col.type === 'number' || col.type === 'email' || col.type === 'password'" -->
+                        <div *ngSwitchDefault [fxFlex]="col.width" [class.translation-icon]="col.allow_translation">
+                            <mat-form-field fxFlex="100" appearance="outline">
+                                <mat-label>{{col.title}}</mat-label>
+                                <input matInput [type]="col.type" autocomplete="off" [autofocus]="i === 0"
+                                    [required]="col.required" [readonly]="col.disable" [formControl]="col.formControl"
+                                    [placeholder]="col.placeholder">
+
+                                <mat-hint *ngIf="col.hint != null"> {{col.hint}}</mat-hint>
+                                <mat-error *ngIf="col.formControl.invalid"> {{col.error}} </mat-error>
+
+                                <mat-icon *ngIf="col.allow_translation" matSuffix
+                                    (click)="doTranslation(col.name, col.formControl.value)" style="align-self: center;"
+                                    color="accent" matTooltip="Add Translation">translate
+                                </mat-icon>
+                            </mat-form-field>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                <!-- <pre fxFlex="100">{{theForm.value | json}}</pre> -->
+
+            </div>
+        </div>
+
+        <div fxLayout="column">
+            <mat-divider></mat-divider>
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="16px" style="padding: 8px 16px;">
+
+                <button type="submit" mat-raised-button color="primary" (click)="onSaveAndNew()"
+                    [disabled]="!theForm.valid">
+                    <span>Save &amp; New</span>
+                </button>
+                <button type="button" mat-raised-button color="primary" (click)="onSave()" [disabled]="!theForm.valid">
+                    <span>Save</span>
+                    <mat-progress-spinner *ngIf="disableSaveBtn" diameter="20" strokeWidth="3" class="btn-spinner"
+                        color="accent" mode="indeterminate"> </mat-progress-spinner>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

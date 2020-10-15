@@ -1,0 +1,51 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="container-bg" *ngIf="emailVerified">
+    <div fxLayoutAlign="space-around center" class="circle success">
+        <mat-icon class="alert success">done</mat-icon>
+    </div>
+
+    <div fxFlex="100" style="height: 72px;"></div>
+    <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
+        <div fxFlex="100" style="font-size: 24px; text-align: center; font-weight: bold; color: #3a3a3a;">Congratulations</div>
+
+        <span fxFlex="100" style="line-height: 54px; font-size: 20px; text-align: center; color: #3a3a3a;"> Your email has been verified.</span>
+        <span fxFlex="100" style="font-size: 20px; text-align: center; color: #3a3a3a;"> Your company is in activation process, we will
+            notify you on the email once it is activated and ready to use.</span>
+    </div>
+
+    <div fxFlex="100" style="height: 48px;"></div>
+
+    <div fxFlex="100" fxLayoutAlign="center center">
+        <button fxFlex="10" type="submit" style="margin-top: 20px;" mat-raised-button color="accent">
+            <a fxFlex="100" routerLink="/">
+
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <span style="color: #ffffff;">Login</span>
+                </div>
+            </a>
+        </button>
+    </div>
+</div>
+
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="container-bg" *ngIf="!emailVerified">
+    <div fxLayoutAlign="space-around center" class="circle error">
+        <mat-icon class="alert error">clear</mat-icon>
+    </div>
+
+    <div fxFlex="100" style="height: 72px;"></div>
+    <div fxFlex="100" fxLayoutAlign="center center">
+        <span style="font-size: 20px; color: #3a3a3a;">Your email has not been verified yet.</span>
+    </div>
+
+    <div fxFlex="100" style="height: 48px;"></div>
+
+    <div fxFlex="100" fxLayoutAlign="center center">
+        <button fxFlex="10" type="submit" style="margin-top: 20px;" mat-raised-button color="accent">
+            <a fxFlex="100" routerLink="/">
+
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <span style="color: #ffffff;">Login</span>
+                </div>
+            </a>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,179 @@
+@mixin general-table-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+
+    $is-dark: map-get($theme, is-dark);
+
+    .table-container 
+    {
+        th.mat-cell,
+        th.mat-header-cell
+        {
+            min-width: 120px;
+            padding: 0 5px;
+            font-size: 14px;
+
+            @if ($is-dark) {
+                color: #e9e9e9;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+            }
+
+            @else {
+                color: #62646a;
+                border-bottom: 1px solid rgba(41, 45, 57, 0.31);
+            }
+
+            // color: mat-color($foreground);
+            // border-bottom: 1px solid mat-color($foreground, divider);
+        }
+
+        td.mat-cell {
+
+            @if ($is-dark) {
+                color: #fff;
+                opacity: 0.65;
+                border-right: 1px solid rgba(255, 255, 255, 0.10);
+            }
+
+            @else {
+                opacity: 0.9;
+                color: #62646a;
+                border-right: 1px solid rgba(41, 45, 57, 0.31);
+            }
+
+            // color: mat-color($foreground);
+            // border-right: 1px solid mat-color($foreground, divider);
+            // border-bottom: 1px solid mat-color($foreground, divider);
+        }
+
+        tr.mat-row:nth-child(even) {
+            background: mat-color($foreground, dividers);
+        }
+
+        .disabled-row-actions
+        {
+            @if ($is-dark)
+            {
+                color: rgba(175, 175, 175, 0.5);
+            } @else {
+                color: rgba(98, 100, 106, 0.5);
+            }
+        }
+
+        .refresh-btn
+        {
+            @if ($is-dark)
+            {
+                color: #afafaf;
+            } 
+            @else 
+            {
+                color: #62646a;
+            }
+
+            border-color: mat-color($primary, 500);
+            // color: mat-color($foreground, darker) !important;
+            padding: 0 10px;
+            // line-height: 24px;
+
+            // > .mat-button-wrapper {
+            //     > .mat-icon {
+            //         font-size: 18px;
+            //         // line-height: 24px;
+            //     }
+            // }
+        }
+        
+        a {
+            color: mat-color($primary);
+        }
+
+        mat-paginator
+        {
+
+            @if ($is-dark)
+            {
+                background: #62646a !important;
+            } @else {
+                background: #e6e6e6 !important;
+            }
+
+            // color: $table_text_color !important;
+            // background: $paginator_background !important;
+
+            // ::ng-deep.mat-select-value { color: $table_text_color!important; }
+            // ::ng-deep.mat-select-arrow { color: $table_text_color !important; }
+            // ::ng-deep.mat-paginator-icon { color: $table_text_color !important; }
+        }
+
+        .pagination
+        {
+            border-top: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
+
+        .active-row-actions {
+            color: map-get($primary, 500);
+            ;
+        }
+
+        td.col-actions {
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        #search-container {
+            mat-icon {
+                cursor: pointer;
+                @if ($is-dark) {
+                    color: #afafaf;
+                }
+                @else
+                {
+                    color: #62646a;
+                }
+            }
+        }
+    }
+
+    // Column filter panel and date-range-filter theming.
+    .filter-options {
+        border-bottom: solid 1px mat-color($primary, 500);
+
+        .date-filter-label {
+            display: flex;
+            align-items: center;
+            color: mat-color($foreground, disabled-button);
+            margin-right: 20px;
+        }
+
+        .btn-select-all {
+            border-color: mat-color($primary, 500);
+            color: mat-color($primary, 500);
+            margin-right: 5px;
+
+            &:disabled {
+                border-color: mat-color($foreground, disabled-button);
+            }
+        }
+
+        .btn-clear {
+            border-color: mat-color($foreground, disabled-button);
+            color: mat-color($foreground, disabled-button);
+        }
+
+        .search-icon {
+            color: mat-color($primary, 500) !important;
+        }
+    }
+
+    .filter-content-counts {
+        font-size: 14px;
+        padding-left: 6px;
+        text-align: left;
+
+        color: mat-color($foreground, disabled-button);
+    }
+}

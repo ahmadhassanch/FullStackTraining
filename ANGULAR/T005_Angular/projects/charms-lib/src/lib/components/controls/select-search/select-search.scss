@@ -1,0 +1,71 @@
+$mat-menu-side-padding: 16px !default;
+$clear-button-width: 20px;
+$multiple-check-width: 33px;
+
+.chi-select-search-hidden {
+    visibility: hidden;
+}
+
+.chi-select-search-inner {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    z-index: 100;
+    font-size: inherit;
+    /*
+    compensate effects of .mat-datepicker-content
+    (see https://github.com/angular/material2/blob/master/src/lib/datepicker/datepicker-content.scss#L27)
+    TODO: implement proper theming (https://github.com/bithost-gmbh/ngx-chi-select-search/issues/34)
+    */
+    box-shadow: none !important;
+    border-radius: 0;
+
+    /* Prevent iOS scroll issue (https://github.com/bithost-gmbh/ngx-chi-select-search/issues/70)*/
+    -webkit-transform: translate3d(0, 0, 0);
+
+    &.chi-select-search-inner-multiple {
+
+        width: 100%;
+    }
+}
+
+::ng-deep .chi-select-search-panel {
+    /* allow absolute positioning relative to outer options container */
+    transform: none !important;
+    overflow-x: hidden;
+}
+
+.chi-select-search-input {
+    padding: $mat-menu-side-padding;
+    padding-right: $mat-menu-side-padding + $clear-button-width;
+    box-sizing: border-box;
+}
+
+.chi-select-search-no-entries-found {
+    padding: $mat-menu-side-padding;
+}
+
+.chi-select-search-clear {
+    position: absolute;
+    right: 4px;
+    top: 5px;
+}
+
+::ng-deep .cdk-overlay-pane-select-search {
+    &.cdk-overlay-pane-select-search-with-offset {
+        /* correct offsetY so that the selected option is at the position of the select box when opening */
+        margin-top: -50px;
+    }
+}
+
+::ng-deep .mat-option[aria-disabled=true].contains-chi-select-search {
+    /* let move chi-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
+    position: static;
+    padding: 0;
+
+    .mat-icon {
+        margin-right: 0px;
+    }
+}

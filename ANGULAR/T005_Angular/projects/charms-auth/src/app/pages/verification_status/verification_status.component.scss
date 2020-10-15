@@ -1,0 +1,40 @@
+.container-bg {
+    // background: url("/assets/images/dark-material-bg.jpg") 0 0/cover no-repeat;
+    width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(209, 196, 196, 0.3);
+}
+
+.img-success {
+    height: 152px;
+}
+
+.circle {
+    height: 152px;
+    width: 152px;
+    border-radius: 50%;
+    margin: 18px;
+}
+
+.circle.success {
+    border: 4px solid rgb(106, 184, 61);
+}
+
+.success {
+    color:rgb(106, 184, 61);
+}
+
+.error {
+    color:rgb(165, 40, 40);
+}
+
+.circle.error {
+    border: 4px solid rgb(165, 40, 40);
+}
+
+.alert {
+    font-size: 64px;
+    height: 64px;
+    width: 64px;
+}

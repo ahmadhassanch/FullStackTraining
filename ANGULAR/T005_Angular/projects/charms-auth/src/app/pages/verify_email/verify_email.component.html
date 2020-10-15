@@ -1,0 +1,28 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="container-bg">
+    <div fxLayoutAlign="space-around center" class="circle success">
+        <mat-icon class="alert success">done</mat-icon>
+    </div>
+
+    <div fxFlex="100" style="height: 72px;"></div>
+
+    <div fxFlex="100" fxLayoutAlign="center center">
+        <span style="font-size: 20px; color: #3a3a3a;">An email has been sent to {{user_email}}, please verify your
+            email.</span>
+    </div>
+
+    <div fxFlex="100" style="height: 48px;"></div>
+
+    <div fxFlex="100" fxLayoutAlign="center center">
+        <button fxFlex="10" type="submit" style="margin-top: 20px;" mat-raised-button color="accent">
+            <a fxFlex="100" [href]="loginUrl">
+
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <span style="color: #ffffff;">Login</span>
+                </div>
+            </a>
+        </button>
+    </div>
+
+</div>
+
+<!-- <header-nav></header-nav> -->

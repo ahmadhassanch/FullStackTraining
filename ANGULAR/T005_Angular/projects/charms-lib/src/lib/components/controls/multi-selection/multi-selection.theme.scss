@@ -1,0 +1,21 @@
+@mixin multi-selection-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    
+    $is-dark: map-get($theme, is-dark);
+
+    .selection-chip
+    {
+        border: 1px solid mat-color($primary);
+        color: mat-color($primary);
+    }
+
+    .chip-selected
+    {
+        background-color: mat-color($primary);
+    }
+}

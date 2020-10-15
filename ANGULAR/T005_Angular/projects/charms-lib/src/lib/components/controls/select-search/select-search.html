@@ -1,0 +1,40 @@
+<!-- Placeholder to adjust vertical offset of the mat-option elements -->
+<input matInput
+       class="chi-select-search-input chi-select-search-hidden" />
+
+<!-- Note: the  mat-datepicker-content mat-tab-header are needed to inherit the material theme colors, see PR #22 -->
+
+<div #innerSelectSearch fxLayout="row wrap" fxLayoutAlign="space-between center"
+     class="chi-select-search-inner mat-typography mat-datepicker-content mat-tab-header"
+     [ngClass]="{'chi-select-search-inner-multiple': matSelect.multiple}">
+
+    <input matInput fxFlex
+        class="chi-select-search-input"
+        autocomplete="off"
+        #searchSelectInput
+        (keydown)="_handleKeydown($event)"
+        (input)="onInputChange($event.target.value)"
+        (blur)="onBlur($event.target.value)"
+        [placeholder]="placeholderLabel" />
+
+        <button *ngIf="value" mat-icon-button matSuffix aria-label="Clear" (click)="_reset(true)">
+            <mat-icon >close</mat-icon>
+        </button>
+
+    <div *ngIf="field?.foreign?.advance_search?.showAdvanceSearch" fxFlex.gt-md="31" fxFlex.lt-lg="35">
+        <button mat-button color="accent" (click)="onAdvanceSearch()">
+            {{ field?.foreign?.advance_search?.title }}
+        </button>
+    </div>
+
+    <div fxFlex="100">
+        <mat-progress-bar color="accent" mode="query" *ngIf="field.loading">
+        </mat-progress-bar>
+    </div>
+
+</div>
+
+<div *ngIf="noEntriesFoundLabel && value && _options?.length === 0"
+     class="chi-select-search-no-entries-found">
+    {{noEntriesFoundLabel}}
+</div>

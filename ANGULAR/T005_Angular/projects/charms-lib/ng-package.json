@@ -1,0 +1,17 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/charms-lib",
+  "assets": ["**/*.theme.scss"],
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "lodash": "lodash",
+      "perfect-scrollbar": "PerfectScrollbar",
+      "date-fns": "dateFns",
+      "@amcharts/amcharts4/core": "core$1",
+      "@amcharts/amcharts4/charts": "charts",
+      "@amcharts/amcharts4/themes/animated": "am4themes_animated"
+    },
+    "styleIncludePaths": ["../../shared-styles"]
+  }
+}

@@ -1,0 +1,34 @@
+.text-overflow {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+
+.selection-chip-container
+{
+    padding: 10px 10px; 
+
+    .selection-chip
+    {
+        transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+        display: block;
+        padding: 7px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 13px;
+        line-height: 18px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .chip-selected {
+        color: white;
+        text-align: center;
+    }
+}
+
+.mat-form-field ::ng-deep.mat-form-field-label-wrapper {
+    top: -14px !important;
+}

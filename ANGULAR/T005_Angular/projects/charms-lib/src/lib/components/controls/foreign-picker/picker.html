@@ -1,0 +1,41 @@
+<mat-select [required]="field.required" [formControl]="field.formControl"
+    [placeholder]="field.placeholder" [tabIndex]="tabindex" (openedChange)="foreignOpenedChange($event, '')">
+    <mat-select-trigger>
+        {{displayValue}}
+        <span class="line2"
+            *ngIf="(field.foreign.mode === 'double' || field.foreign.mode === 'triple') 
+                && displayMulValue !== null">({{displayMulValue}})</span>
+    </mat-select-trigger>
+
+    <mat-option>
+        <chi-select-search [field]="field" (search)="searchRecords($event)" (advanceSearch)="advanceSearch($event)">
+        </chi-select-search>
+    </mat-option>
+    <!-- <mat-option *ngIf="!isFound" [value]="null" (onSelectionChange)="onSelect($event, null)">No Record Found!</mat-option> -->
+
+    <mat-option *ngIf="!required" [value]="null" (onSelectionChange)="onSelect($event, null)">None</mat-option>
+
+    <ng-container *ngIf="field.foreign?.allowAdd">
+        <mat-option [value]="null" (onSelectionChange)="onAdd($event)">Add New</mat-option>
+    </ng-container>
+
+    <ng-container *ngIf="field.options.length == 0">
+        <mat-option [value]="null" (onSelectionChange)="onSelect($event, null)">No Record Found!</mat-option>
+    </ng-container>
+
+    <ng-container *ngIf="field.options.length > 0">
+        <mat-option *ngFor="let opt of field.options" [value]="opt.id" (onSelectionChange)="onSelect($event, opt)"
+            [class.double-line]="field.foreign.mode !== 'single'">
+            <span *ngIf="field.foreign.mode === 'single'; else doubleLine">{{opt[field.foreign.columns[0]]}}</span>
+            <ng-template #doubleLine>
+                <div fxLayout="column">
+                    <span class="line1">{{opt[field.foreign.columns[0]]}}</span>
+                    <span class="line2">
+                        <span>{{opt[field.foreign.columns[1]]}}</span>
+                        <span *ngIf="field.foreign.mode === 'triple'"> &mdash; {{opt[field.foreign.columns[2]]}}</span>
+                    </span>
+                </div>
+            </ng-template>
+        </mat-option>
+    </ng-container>
+</mat-select>

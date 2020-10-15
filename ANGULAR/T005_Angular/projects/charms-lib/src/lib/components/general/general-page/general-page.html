@@ -1,0 +1,21 @@
+<div class="page-layout blank"
+     fxFill fxFlex="100"
+     fxLayout="row"
+     fxLayoutAlign="start stretch"
+     style="height: 100%;"
+     [ngClass]="isDialog ? '' : 'p-8'">
+    <div [@tableExpand]="{value: formWidth === 0 ? 'expanded' : 'collapsed', params: {tableWidth: tableWidth}}" [fxFlex]="tableWidth">
+
+        <mat-card fxLayout="column" fxFlex="100" style="padding: 0;">
+            <chi-general-table fxFlex [config]="tableConfig" [actions]="actions" (signals)="onTableSignal($event)" [foreignKey]="foreignKey" [foreignKeyVal]="foreignKeyVal"></chi-general-table>
+        </mat-card>
+
+    </div>
+    <div [@formExpand]="formWidth > 0 ? 'expanded' : 'collapsed'" [fxFlex]="formWidth">
+        <mat-card fxLayout="column" style="height: 100%; padding: 0;" *ngIf="formWidth > 0">
+            <chi-general-form fxFlex="100" [oid]="oid" [config]="formConfig" [actions]="actions" (signals)="onTableSignal($event)" [foreignKey]="foreignKey" [foreignKeyVal]="foreignKeyVal"></chi-general-form>
+        </mat-card>
+
+    </div>
+
+</div>

@@ -1,0 +1,58 @@
+
+.dialog-position {
+    position: relative;
+    height: 100% !important;
+}
+
+.menu {
+    padding-left: 16px;
+    cursor: pointer !important;
+    border-bottom: 1px solid #c8c8c8;
+
+
+    &:hover {
+        background: #d1dae1 !important;
+    }
+}
+
+.selected-menu {
+    background: #a0a0a0 !important;
+}
+
+.mat-divider.mat-divider-inset{
+    margin-left: unset;
+}
+
+.file-wrapper {
+    height: 170px;
+    padding: 5px; 
+    margin: 5px; 
+    cursor: pointer; 
+    border:1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 5px; 
+}
+
+.file-wrapper:hover {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.file-thumb {
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+    border: none;
+}
+
+.btn-remove {
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    border: none;
+    padding: 3px;
+    background: #d32f2f;
+    margin-top: 5px;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none!important;
+}

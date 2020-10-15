@@ -1,0 +1,22 @@
+<div class="chi-dialog" >
+    <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center">
+        <div class="chi-dialog-title" fxFlex="100" fxLayout="row" fxLayoutAlign="end center">
+            <h1 fxFlex>Image Viewer</h1>
+            <button mat-icon-button (click)="closeDialog()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+
+        <div *ngIf="!isMultiple" fxFlex="100" style="height: 90vh;" class="chi-device-image-outer" chiPerfectScrollbar>
+            <img [src]="FileUrl" (click)="zoomImage()" [ngClass]="(isZoomed) ? 'zoom' : 'chi-device-image'"/>
+        </div>
+
+        <div *ngIf="isMultiple" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center" style="height:90vh;">
+            <mat-icon *ngIf="idx > 0"  (click)="onPrevious()">keyboard_arrow_left</mat-icon>
+            <div fxFlex="100" style="height: 100vh;" class="chi-device-image-outer" chiPerfectScrollbar>
+                <img [src]="currentImage" (click)="zoomImage()" [ngClass]="(isZoomed) ? 'zoom' : 'chi-device-image'"/>
+            </div>
+            <mat-icon *ngIf="idx < FileUrl.length-1" (click)="onNext()">keyboard_arrow_right</mat-icon>
+        </div>
+    </div>
+</div>

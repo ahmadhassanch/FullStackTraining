@@ -1,0 +1,127 @@
+<div fxLayout="column" [ngClass]="(inDailog) ? 'chi-dialog' : ''" [style.height]="inDailog ? '100%' : '285px'" class="dialog-container">
+    <div class="chi-dialog-title" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="inDailog">
+        <h1 fxFlex>{{title}}</h1>
+        <button mat-icon-button
+                matDialogClose
+                tabindex="-1">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <mat-dialog-content fxFlex="100"
+        fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="8px" class="p-8" fusePerfectScrollbar>
+           
+        <form [formGroup]="theForm" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="12px">
+
+            <mat-form-field [fxFlex]="flex" appearance="outline">
+                <mat-label>Hospital No.</mat-label>
+                <input type="text" formControlName="hospital_no" matInput> 
+            </mat-form-field>
+            
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="!hideFiled">
+                <mat-label>First Name</mat-label>
+                <input type="text" formControlName="first_name" matInput> 
+            </mat-form-field>
+
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="!hideFiled">
+                <mat-label>Last Name</mat-label>
+                <input type="text" formControlName="last_name" matInput> 
+            </mat-form-field>
+
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="!hideFiled && isVisible('extra_name')">
+                <mat-label>Other Name</mat-label>
+                <input type="text" formControlName="extra_name" matInput> 
+            </mat-form-field>
+
+            <mat-form-field [fxFlex]="flex" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="text" formControlName="email" matInput> 
+            </mat-form-field>
+
+            <mat-form-field [fxFlex]="flex" appearance="outline">
+                <mat-label>Username</mat-label>
+                <input type="text" formControlName="username" matInput> 
+            </mat-form-field>
+
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="!hideFiled">
+                <mat-label>Mobile#</mat-label>
+                <input type="text" formControlName="mobile_phone" matInput> 
+            </mat-form-field>
+        
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="isVisible('birth_date')">
+                <mat-label>DOB</mat-label>
+                <chi-date-picker [field]="birth_date"></chi-date-picker>
+            </mat-form-field> 
+
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="!hideFiled">
+                <mat-label>National Identity</mat-label>
+                <input type="text" formControlName="nic" matInput> 
+            </mat-form-field>
+
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="isVisible('episode_status')">
+                <mat-label>Episode Status</mat-label>
+                <mat-select formControlName="episode_status" >
+                    <mat-option  [value]="null">None</mat-option>
+                    <mat-option  value="Not Started">Not Started</mat-option>
+                    <mat-option  value="In-complete">Incomplete</mat-option>
+                    <mat-option  value="Complete">Complete</mat-option>
+                    <mat-option  value="On-boarded">Onboarded</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="isVisible('age')">
+                <mat-label>Age</mat-label>
+                <input type="number" formControlName="age" matInput min="1" 
+                onkeypress="return (event.charCode == 8 || event.charCode == 0 || 
+                    event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"> 
+            </mat-form-field>
+            
+            <mat-form-field [fxFlex]="flex" appearance="outline" *ngIf="isVisible('age')">
+                <mat-select formControlName="operator" >
+                    <mat-option  value="lt">Less than</mat-option>
+                    <!-- <mat-option  value="le">Less than eq</mat-option> -->
+                    <mat-option  value="gt">Greater than</mat-option>
+                    <!-- <mat-option  value="ge">Greater than eq</mat-option> -->
+                    <!-- <mat-option  value="eq">Equal</mat-option>
+                    <mat-option  value="ne">Not equal</mat-option> -->
+                </mat-select>
+            </mat-form-field>
+
+            <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="12px" *ngIf="isVisible('start_date') && isVisible('end_date')">
+                <div fxFlex="100">
+                    REGISTRATION DATE:
+                </div>
+
+                <mat-form-field [fxFlex]="flex" appearance="outline">
+                    <mat-label>From</mat-label>
+                    <chi-date-picker [field]="start_date"></chi-date-picker>
+                </mat-form-field> 
+
+                <mat-form-field [fxFlex]="flex" appearance="outline">
+                    <mat-label>To</mat-label>
+                    <chi-date-picker [field]="end_date"></chi-date-picker> 
+                </mat-form-field>
+    
+            </div>
+
+        </form>
+
+    </mat-dialog-content>
+
+    <div fxLayout="row" fxLayoutAlign="end center" [ngClass]="(inDailog) ? 'chi-dialog-actions' : ''" [style.margin]="inDailog ? '0' : '0 0 10px 0'">
+
+        <button type="button" color="warn" mat-raised-button 
+            style="margin-right: 16px;" (click)="onCancel()">Close
+        </button>
+
+        <button type="button" *ngIf="checkFormData()" color="warn" mat-raised-button style="margin-right: 16px;"
+            (click)="onClearFilter()">Clear
+        </button>
+
+        <button type="button" color="accent" mat-raised-button
+            style="margin-right: 16px;"
+            (click)="onApplyFilters()">Apply
+        </button>
+    </div>
+
+</div>

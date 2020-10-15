@@ -1,0 +1,7 @@
+<div fxLayout="column" fxLayoutGap="16px">
+
+    <h1>ECG Chart</h1>
+
+    <chi-offline-chart-channel *ngFor="let c of channels" [channel]="channel" [isResized]="isResized" style="border: 1px solid red;"></chi-offline-chart-channel>
+
+</div>

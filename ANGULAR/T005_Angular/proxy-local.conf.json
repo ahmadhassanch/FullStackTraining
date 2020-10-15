@@ -1,0 +1,68 @@
+{
+    "/api": {
+        "target": {
+            "host": "localhost",
+            "protocol": "http:",
+            "port": 8080
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/auth": {
+        "target": {
+            "host": "localhost",
+            "protocol": "http:",
+            "port": 8080
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/Authorize": {
+        "target": {
+            "host": "localhost",
+            "protocol": "http:",
+            "port": 8080
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/assets/apps/auth": {
+        "target": {
+            "host": "localhost",
+            "protocol": "http:",
+            "port": 8080
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/Logout": {
+        "target": {
+            "host": "localhost",
+            "protocol": "http:",
+            "port": 8080
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/ws": {
+        "target": "wss://localhost",
+        "secure": false,
+        "changeOrigin": true,
+        "ws": true
+    },
+    "/calls": {
+        "target": {
+            "host": "localhost",
+            "protocol": "http:",
+            "port": 8080
+        },
+        "changeOrigin": true,
+        "secure": false
+    },
+    "/calls/room": {
+        "target": "wss://localhost",
+        "secure": false,
+        "changeOrigin": true,
+        "ws": true
+    }
+}

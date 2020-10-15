@@ -1,0 +1,62 @@
+.fl_result {
+
+    font-size: 14px;
+    &.normal {
+        color: green;
+    }
+
+    &.warning {
+        color: rgb(233, 151, 0);
+    }
+
+    &.critical {
+        color: red;
+    }
+
+    &.ultra-critical {
+        color: rgb(155, 1, 1);
+    }
+}
+
+.result {
+    border-radius: 12px;
+    padding: 3px 10px;
+    line-height: 26px;
+    font-weight: 700;
+
+    &.active {
+        background-color: green;
+        color: #ffffff;
+    }
+
+    &.inactive {
+        // background-color: green;
+        // color: #000000;
+    }
+
+    &.unverified {
+        background-color: purple;
+        color: #ffffff;
+    }
+}
+
+.float{
+    width: 0%;
+    z-index: 9999;
+	position:fixed;
+	text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    right: 40px;
+    top: 0px;
+}
+
+.floating-icon {
+    // border: 1px solid #000 !important; 
+    border-radius: 0 0 0 90px !important;
+}
+
+.floating-ic {
+    color: #ffffff;
+    margin-top: -10px;
+    margin-right: -7px;
+}

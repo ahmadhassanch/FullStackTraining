@@ -1,0 +1,48 @@
+<div fxLayout="row wrap" fxLayoutAlign="start">
+    
+    <div fxFlex="100" 
+        class="graph-title"
+        [class.graph-title-dark]="currentTheme === 'theme-default'"
+        [class.graph-title-light]="currentTheme != 'theme-default'">
+        {{name}}
+    </div>
+
+    <div fxFlex="92">
+        <div [attr.id]="chartId" [style.width.%]="100" [style.height.px]="400"></div>
+    </div>
+
+    <div fxFlex="6"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="20px"
+        [class.dark-theme-checkboxes]="currentTheme === 'theme-default'">
+
+        <mat-checkbox 
+            (change)="onTrendsChange($event)"
+            color="accent" 
+            class="chart-radio-button radio-primary"
+            matTooltip="Show Trend Lines"
+            [(ngModel)]="range.trend"></mat-checkbox>
+
+        <mat-checkbox 
+            (change)="onRangesChange($event)"
+            color="primary" 
+            class="chart-radio-button radio-primary"
+            matTooltip="Show Normal Ranges"
+            [(ngModel)]="range.normal"></mat-checkbox>
+
+        <mat-checkbox 
+            (change)="onRangesChange($event)"
+            color="accent" 
+            class="chart-radio-button radio-accent"
+            matTooltip="Show Warning Ranges"
+            [(ngModel)]="range.warning"></mat-checkbox>
+            
+        <mat-checkbox 
+            (change)="onRangesChange($event)"
+            color="warn" 
+            class="chart-radio-button radio-warn"
+            matTooltip="Show Critical Ranges"
+            [(ngModel)]="range.critical"></mat-checkbox>
+    </div>
+</div>

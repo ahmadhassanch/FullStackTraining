@@ -1,0 +1,97 @@
+.result {
+    &.complete {
+        color: green;
+    }
+
+    &.in-complete {
+        color: red;
+    }
+
+    &.on-boarded {
+        color: blue;
+    }
+
+    &.not-started {
+        color: orange;
+    }
+}
+
+.status {
+    font-weight: 600;
+    padding: 4px 6px;
+    border-radius: 4px;
+    color: #fff;
+
+    &.taken {
+        background-color: green;
+    }
+
+    &.assigned {
+        background-color: red;
+    }
+
+    &.received {
+        background-color: #67ea24;
+    }
+
+    &.to-be-verified {
+        background-color: orange;
+    }
+
+    &.pending {
+        background-color: #4f161c;
+    }
+
+    &.in-progress {
+        background-color: #143c1e;
+    }
+
+    &.completed {
+        background-color: #5a6477;
+    }
+
+    &.cancelled {
+        background-color: #f71414;
+    }
+
+    &.checked-in {
+        color: #67ea24;
+    }
+
+    &.checked-out {
+        color: #f71414;
+    }
+
+    &.offline
+    {
+        color: #fb7979;
+    }
+
+    &.online
+    {
+        color: #67ea24;
+    }
+}
+
+.category {
+    font-weight: 600;
+
+    &.personal {
+        color: #67ea24;
+    }
+
+    &.command-center {
+        color: orange;
+    }
+}
+
+.content {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.task-Identifier 
+{
+    color: green;
+    font-weight: 600;
+}

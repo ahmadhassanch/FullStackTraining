@@ -1,0 +1,67 @@
+@mixin input-field-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+
+    $is-dark: map-get($theme, is-dark);
+
+    .mat-form-field
+    {
+        > .mat-form-field-wrapper
+        {
+            > .mat-form-field-flex > .mat-form-field-infix { 
+                padding: 0px 0 13px 0px !important;
+    
+                > .mat-input-element {
+                    vertical-align: middle !important;
+                }
+    
+                > .mat-form-field-label-wrapper { top: -25px; }
+            }
+        }
+    }
+    
+    .mat-form-field-appearance-outline .mat-form-field-can-float .mat-form-field-should-float .mat-form-field-label {
+        width: 133.33333%
+    }
+    
+    mat-select {
+        > .mat-select-trigger {
+            height: 1.19em !important
+        }
+    }
+    
+    .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-appearance-outline.mat-form-field-can-float .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label {
+        transform: translateY(-1.09373em) scale(0.75);
+    }
+    
+    .mat-form-field-subscript-wrapper {
+        margin-top: 0.30666667em;
+    }
+    
+    .mat-form-field-appearance-outline .mat-form-field-label {
+        top: 1.94375em;
+        margin-top: -0.25em;
+    }
+     
+    //input outline color
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: #444957 !important;
+        background: #444957 !important;
+        border-radius: 12px !important;
+    }
+    
+    //mat-input focused color
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+        color: mat-color($primary) !important;
+    }
+    
+    // mat-input error outline color
+    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+        color: red!important;
+        opacity: 0.8!important;
+    }
+}

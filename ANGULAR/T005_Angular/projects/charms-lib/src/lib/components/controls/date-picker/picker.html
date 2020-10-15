@@ -1,0 +1,24 @@
+<div style="position: relative;">
+
+        <input *ngIf="type == 'date'" matInput readonly
+                [disabled]="field.disable"
+                [required]="field.required"
+                [placeholder]="field.placeholder"
+                [chiPanelFor]="datePanel"
+                [value]="formatDate">
+
+        <mat-icon style="position: absolute; right: 0; cursor: pointer;" (click)="onResetDate()" *ngIf="!field.required">close</mat-icon>
+
+        <chi-panel #datePanel="chiPanel">
+                <cg-calendar clickType="button"
+                        (dateChanged)="selectDate($event)"
+                        [defaultDate]="defaultDate"
+                        calendarType="Standard"
+                        [max]="max"
+                        [min]="min"
+                        [type]="type"
+                        [compact]="compact"
+                        [showTodayButton]="showTodayButton">
+                </cg-calendar>
+        </chi-panel>
+</div>

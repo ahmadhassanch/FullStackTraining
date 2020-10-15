@@ -1,0 +1,2 @@
+
+export const GOOGLE_SITE_KEY = '6LdCl8EUAAAAANNDzEGwkQdnqV28UUnN4PFYZdCT';

@@ -1,0 +1,30 @@
+.primary-icon-btn
+{
+    background-color: none;
+
+    .primary-icon
+    {
+        color: #3496CE;
+    }
+}
+
+.btn-default
+{
+    float: left;
+    height: 45px;
+    width: 45px;
+    font-size: 30px;
+    background: grey;
+    border-radius: 100%;
+
+    .default-icon
+    {
+        color: white;
+        font-size: 25px;
+        line-height: 45px;
+        width: 45px;
+        height: 45px;
+        padding: 0px;
+        margin: auto;
+    }
+}

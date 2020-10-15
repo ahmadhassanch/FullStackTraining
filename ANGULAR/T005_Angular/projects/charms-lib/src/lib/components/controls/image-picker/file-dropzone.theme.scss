@@ -1,0 +1,17 @@
+@mixin file-dropzone-theme($theme) {
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    
+    $is-dark: map-get($theme, is-dark);
+
+    .dropzone-container {
+        @if($is-dark) {
+            background-color: mat-color($background);
+            color: mat-color($foreground);
+        }
+    }
+}

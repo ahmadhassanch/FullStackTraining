@@ -1,0 +1,32 @@
+<div *ngIf="isRecorderAvailable">
+    <button
+        type="button"
+        *ngIf="!isRecording"
+        (click)="startRecording($event)"
+        mat-icon-button
+        matTooltip="Record Audio" 
+        [ngClass]="isPrimaryIcon ? 'primary-icon-btn': 'btn-default'">
+        <mat-icon [ngClass]="isPrimaryIcon ? 'primary-icon': 'default-icon'">
+            mic
+        </mat-icon>
+    </button> 
+    <button
+        *ngIf="isRecording"
+        (click)="stopRecording($event)"
+        mat-icon-button
+        matTooltip="Send & Stop Recording" 
+        style="float: left;
+            height: 45px;
+            width: 45px;
+            font-size: 30px;
+            background: #dd3544;
+            border-radius: 100%;">
+            <mat-icon style="color: white;
+            font-size: 25px;
+            line-height: 45px;
+            width: 45px;
+            height: 45px;
+            padding: 0px;
+            margin: auto;">stop</mat-icon>
+    </button> 
+</div>
